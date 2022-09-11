@@ -17,4 +17,3 @@ countries_router.get('/:countryId', (req, res) => {
 
 
 module.exports = countries_router;
-
