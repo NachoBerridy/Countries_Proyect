@@ -5,8 +5,8 @@ const { DataTypes } = require('sequelize');
 const country = (sequelize) => {
   // defino el modelo
   sequelize.define('country', {
-    Id: {
-      type: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.STRING,
       primaryKey: true,
       allowNull: false,
     },
@@ -16,7 +16,7 @@ const country = (sequelize) => {
     },
     flag: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
     continent: {
       type: DataTypes.STRING,
@@ -31,7 +31,7 @@ const country = (sequelize) => {
       allowNull: true,
     },
     area: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.FLOAT,
       allowNull: true,
     },
     population: {
