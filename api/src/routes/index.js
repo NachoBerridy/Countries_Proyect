@@ -1,26 +1,26 @@
 const { Router } = require('express')
-const express = require('express')
-const { getCountries, getCountriesByName } = require('../controllers/countries.controllers.js')
-//const countries_router = Router()
-
-//countries_router.get('/', getCountries)
-
-//const app = express()
+const { getCountries, getCountriesByName, getCountriesByCode } = require('../controllers/countries.controllers.js')
+const { postActivity } = require('../controllers/activities.controllers.js')
 
 const router = Router()
 
-// Configurar los routers
-// Ejemplo: router.use('/auth', authRouter)
-
-router.get('/countries', getCountries)/* async (req, res) =>{
+router.get('/countries', async (req, res) =>{
     try {
-        let countries = await getCountries()
-        res.json(countries)
+        if (!req.query.code){
+            let countries = await getCountries()
+            res.json(countries)  
+        }else{
+            let { code } = req.query;
+            let country = await getCountriesByCode(code);
+            res.json(country)
+        }
     } catch (error) {
         res.status(500).json({error: error.message})
     }
-}) */
-
+})
 router.get('/countries/:name', getCountriesByName)
-
+router.post('/Activity', postActivity)
+router.get('*', (req, res) =>{
+    res.status(404).json({error: 'Page not found'})
+})
 module.exports = router
