@@ -38,7 +38,11 @@ const country = (sequelize) => {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-  });
+  },
+  {
+    timestamps: false,
+  }
+  );
 };
 
 module.exports = country;
