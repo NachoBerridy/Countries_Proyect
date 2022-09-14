@@ -1,20 +1,7 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
-import axios from "axios";
-const CountryCard = () => {
-    const [country, setCountry] = useState([]);
-    
 
-    useEffect(() => {
-      const fetchCountry = async () => { 
-        const { data } = await axios.get('http://localhost:3001/countries/Chile');
-        console.log("🚀 ~ file: App.js ~ line 12 ~ fetchCountry ~ data", data)
-        setCountry(data[0]);
-      }
-  
-      fetchCountry();
-    }, []);
+const CountryCard = (country) => {
+    
     console.log("🚀 ~ file: country.jsx ~ line 7 ~ Country ~ country", country)
     return (
         <div>
