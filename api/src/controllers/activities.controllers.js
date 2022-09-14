@@ -12,12 +12,12 @@ const postActivity = async (req, res) => {
         season,
         })
         //cargar la actividad en el pais
-        const country = await countryId.map(c => {
+        const countries = await countryId.map(c => {
             return Country.findByPk(c)
         })
-        await Promise.all(country).then(c => {
-            c.forEach(one => {
-                one.addActivity(newActivity)
+        await Promise.all(countries).then(c => {
+            c.forEach(country => {
+                country.addActivity(newActivity)
             })
         })
         res.json(newActivity)
