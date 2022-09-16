@@ -1,26 +1,33 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { getAllCountries } from "../../actions";
 import axios from "axios";
+import { Connect } from "react-redux";
 
-const Countries = () => {
+const Countries = ({ filteredCountries }) => {
     
-    const [countries, setCountries] = useState([]);
+    //const [countries, setCountries] = useState([]);
     
-
-    useEffect(() => {
+    //let dispatch = React.useDispatch();
+    //const data = dispatch(props.getAllCountries())
+    /* useEffect(() => {
       const fetchCountry = async () => { 
         const { data } = await axios.get('http://localhost:3001/countries');
         setCountries(data);
       }
-  
       fetchCountry();
-    }, [])
+      
+      setCountries(data);
+
+    }, []) */
+
+    getAllCountries();
 
     return (
         <div>
             <h1>Countries</h1>
             <ul>
-                {countries.map((country) => (
+                {filteredCountries.map((country) => (
                     <li key={country.id}>
                         <h3>{country.name}</h3>
                         <p>Continent: {country.continent}</p>
@@ -32,4 +39,17 @@ const Countries = () => {
     );
 }
 
-export default Countries;
+
+function mapDispatchToProps(dispatch) {
+    return {
+        getAllCountries: () => dispatch(getAllCountries()),
+    };
+}
+
+function mapStateToProps(state){
+  return {
+    countries: state.filteredCountries,
+  };
+};
+
+export default Connect(mapStateToProps, mapDispatchToProps)(Countries);
