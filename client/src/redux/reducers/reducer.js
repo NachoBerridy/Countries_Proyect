@@ -1,5 +1,9 @@
-const rootReducer = (/* state = initialState, action */) => {
-    console.log('reducer', /* action */);
+const initialState = {
+    countries: [],
 }
 
-export default rootReducer;
+const rootReducer = (/* state = initialState, action */) => {
+    console.log('reducer', /* action */)
+}
+
+export default rootReducer
