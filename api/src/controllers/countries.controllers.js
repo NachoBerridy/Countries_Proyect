@@ -7,9 +7,16 @@ const getCountries = async () => {
     const apiRequest = await axios.get('https://restcountries.com/v3.1/all')
     const countries = apiRequest.data.map(c => {
       let {cca3, name, flags, continents, capital = ['No capital'], subregion, area, population } = c
+      
+      name = name.common.split(" ").join("_");
+      for (let i = 1; i < name.length; i++) {
+        if (name[i] === "_") {
+          name = name.slice(0, i + 1) + name[i + 1].toUpperCase() + name.slice(i + 2)
+        }  
+      }
       return {
         id: cca3,
-        name: name.common,
+        name: name,
         flag: flags.svg,
         continent: continents[0],
         capital: capital[0],
@@ -18,7 +25,6 @@ const getCountries = async () => {
         population: population, 
       }
     })
-    // console.log(countries)
     await Country.bulkCreate(countries, {ignoreDuplicates: true})
     // res.json(countries)
     let resp = await Country.findAll(
@@ -31,9 +37,10 @@ const getCountries = async () => {
 
     )
     resp = resp.map(c => {
+      name = c.name.split("_").join(" ");
       return {
         id: c.id,
-        name: c.name,
+        name: name,
         flag: c.flag,
         continent: c.continent,
         population: c.population,
@@ -58,9 +65,19 @@ const getCountries = async () => {
 
 const getCountriesByName = async (req, res) => {
   let { name } = req.params
+  console.log("🚀 ~ file: countries.controllers.js ~ line 64 ~ getCountriesByName ~ name", name)
+  name = name.split(" ").join("_");
   name = name.toLowerCase()
   name = name.charAt(0).toUpperCase() + name.slice(1)
+  for (let i = 1; i < name.length; i++) {
+    if (name[i] === "_") {
+      name = name.slice(0, i + 1) + name[i + 1].toUpperCase() + name.slice(i + 2)
+    }  
+  }
+  console.log("🚀 ~ file: countries.controllers.js ~ line 67 ~ getCountriesByName ~ name", name)
+
   try {
+    
     let country = await Country.findAll(
       
       {
@@ -74,6 +91,20 @@ const getCountriesByName = async (req, res) => {
         // logging: console.log
       }
     )
+    country = country.map(c => {
+      name = c.name.split("_").join(" ");
+      return {
+        id: c.id,
+        name: name,
+        flag: c.flag,
+        continent: c.continent,
+        population: c.population,
+        capital: c.capital,
+        subregion: c.subregion,
+        area: c.area,
+        activities: c.activities
+      }
+    })
     if (country.length){
       res.json(country)
     }else{
