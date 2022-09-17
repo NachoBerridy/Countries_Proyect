@@ -1,6 +1,6 @@
 const axios = require('axios')
 const { conn } = require('../db.js')
-const { Country } = conn.models
+const { Country, Activity } = conn.models
 
 const getCountries = async () => {
   try{
@@ -21,11 +21,32 @@ const getCountries = async () => {
     // console.log(countries)
     await Country.bulkCreate(countries, {ignoreDuplicates: true})
     // res.json(countries)
-    let resp = Country.findAll(
+    let resp = await Country.findAll(
       {
-        attributes: ['name', 'flag', 'continent']
+        include: {
+          model: Activity,
+        },
+        attributes: ['id', 'name', 'flag', 'continent', 'population', 'capital', 'subregion', 'area']
       }
+
     )
+    resp = resp.map(c => {
+      return {
+        id: c.id,
+        name: c.name,
+        flag: c.flag,
+        continent: c.continent,
+        population: c.population,
+        capital: c.capital,
+        subregion: c.subregion,
+        area: c.area,
+        activities: c.activities.map(a => {
+          return {
+            name: a.name
+          }
+        })
+      }
+    })
     return resp
   }
   catch (error) {
@@ -41,11 +62,16 @@ const getCountriesByName = async (req, res) => {
   name = name.charAt(0).toUpperCase() + name.slice(1)
   try {
     let country = await Country.findAll(
+      
       {
+        include: {
+          model: Activity,
+          attributes: ['name', 'difficulty', 'duration', 'season']
+        },
         where: {
           name: name
         },
-        logging: console.log
+        // logging: console.log
       }
     )
     if (country.length){
@@ -73,6 +99,8 @@ const getCountriesByCode = async (code) => {
     return error
   }
 }
+
+
 
 module.exports = {
   getCountries,

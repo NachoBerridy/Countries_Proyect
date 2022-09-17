@@ -2,19 +2,21 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+
+import { useParams } from "react-router-dom";
+
 const Country = () => {
     const [country, setCountry] = useState([]);
+    let { countryName } = useParams();
     
-
-    useEffect(() => {
+    useEffect(() => {  
       const fetchCountry = async () => { 
-        const { data } = await axios.get('http://localhost:3001/countries/Chile');
-        console.log("🚀 ~ file: App.js ~ line 12 ~ fetchCountry ~ data", data)
+        const { data } = await axios.get(`http://localhost:3001/countries/${countryName}`)
         setCountry(data[0]);
       }
-  
       fetchCountry();
     }, []);
+
     console.log("🚀 ~ file: country.jsx ~ line 7 ~ Country ~ country", country)
     return (
         <div>
@@ -24,19 +26,21 @@ const Country = () => {
         <p>Area: {country.area}</p>
         <p>Subregion: {country.subregion}</p>
         <p>Continent: {country.continent}</p>
+        <h3>Activities</h3>
+        <ul>
+          {country.activities?.map((activity) => (
+            <li>
+              <h4>{activity.name}</h4>
+              <p>{activity.difficulty}</p>
+              <p>{activity.duration}</p>
+              <p>{activity.season}</p>
+            </li>
+          ))}
+        </ul>
         <img src={country.flag} alt="Country Flag" width="200" />
+
         </div>
     );
 }
-
-/*
-- [ ] Los campos mostrados en la ruta principal para cada país (imagen de la bandera, nombre, código de país de 3 letras y continente)
-- [ ] Código de país de 3 letras (id)
-- [ ] Capital
-- [ ] Subregión
-- [ ] Área (Mostrarla en km2 o millones de km2)
-- [ ] Población
-- [ ] Actividades turísticas con toda su información asociada
-*/
 
 export default Country;

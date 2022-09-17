@@ -12,6 +12,7 @@ const postActivity = async (req, res) => {
         season,
         })
         //cargar la actividad en el pais
+        console.log(countryId)
         const countries = await countryId.map(c => {
             return Country.findByPk(c)
         })
@@ -26,7 +27,22 @@ const postActivity = async (req, res) => {
     }
 }
 
+const getActivities = async (req, res) => {
+    try {
+        const activities = await Activity.findAll(
+            {
+                attributes: ['name']
+            }
+        )
+        res.json(activities)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+}
+
+
 module.exports = {
-    postActivity
+    postActivity,
+    getActivities
 }
 

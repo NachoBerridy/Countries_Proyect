@@ -1,25 +1,19 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-const CountryCard = (country) => {
-    
-    console.log("🚀 ~ file: country.jsx ~ line 7 ~ Country ~ country", country)
+const CountryCard = ({country}) => {
+    let path = `/countries/${country.name}`
     return (
-        <div>
-        <h3>{country.name}</h3>
-        <p>Continent: {country.continent}</p>
-        <img src={country.flag} alt="Country Flag" width="200" />
-        </div>
+      <React.Fragment>
+        <li key={country.id}>
+          <h3>{country.name}</h3>
+          <p>Continent: {country.continent}</p>
+          <Link to = {path}>
+            <img src={country.flag} alt="Country Flag" width="200" />
+          </Link>
+        </li>  
+      </React.Fragment>
     );
 }
-
-/*
-- [ ] Los campos mostrados en la ruta principal para cada país (imagen de la bandera, nombre, código de país de 3 letras y continente)
-- [ ] Código de país de 3 letras (id)
-- [ ] Capital
-- [ ] Subregión
-- [ ] Área (Mostrarla en km2 o millones de km2)
-- [ ] Población
-- [ ] Actividades turísticas con toda su información asociada
-*/
 
 export default CountryCard;
