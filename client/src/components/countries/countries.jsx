@@ -4,27 +4,44 @@ import { useSelector,useDispatch } from "react-redux";
 import CountryCard from "../countryCard/countryCard";
 import FilterBar from "../filterBar/filterBar.jsx";
 import { getCountries, getActivities} from "../../redux/actions";
+import Pagination from "../pagination/pagination.jsx";
 
 
 const Countries = () => {
   const dispatch = useDispatch();
   const countries = useSelector((state) => state.filteredCountries);
+  const [firstCountry, setFirstCountry] = useState(0);
+  const [lastCountry, setLastCountry] = useState(9);
+  const [buttons, setButtons] = useState([]);
   useEffect(() => {
     dispatch(getCountries())
     dispatch(getActivities());
+
   }, [dispatch]);
 
   useEffect(() => {
+    let arr = []
+    for (let i = 0; i < countries.length /10; i++) {
+      arr.push(i)
+    }
+    setButtons(arr);
   }, [countries]);
+
+  const paginate = (number) => {
+    setFirstCountry(number * 10);
+    setLastCountry((number + 1) * 10);
+  };
 
   return (
     <div>
       <h1>Countries</h1>
       <FilterBar/>
-      <ul>
-        {countries.map((country) => (<CountryCard country={country}/>))}
-        
-      </ul>
+      <Pagination countriesPerPage={10} totalCountries={countries.length} paginate = {paginate}/>
+      <div className="countries">
+        {countries.slice(firstCountry,lastCountry).map((country) => (
+            <CountryCard country={country}/>
+        ))}
+      </div>
     </div>
   );
 }
