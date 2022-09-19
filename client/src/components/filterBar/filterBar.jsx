@@ -1,15 +1,17 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useSelector,useDispatch } from "react-redux";
-import { sortCountries, filterCountriesByActivity, filterCountriesByContinent} from "../../redux/actions";
+import { sortCountries, filterCountriesByActivity, filterCountriesByContinent, removeFilter} from "../../redux/actions";
 
 const FilterBar = () => {
   const dispatch = useDispatch();
   const continents = useSelector(state => state.countries).map(c => c.continent).filter((v, i, a) => a.indexOf(v) === i);
   const activities = useSelector((state) => state.activities).map(a => a.name);
 
-  const [order, setOrder] = useState('disorder');
+  const [continent, setContinent] = useState('');
+  const [activity, setActivity] = useState('');
   
+  const [order, setOrder] = useState('disorder');
   
   const ordenar = (e) => {
     
@@ -17,29 +19,33 @@ const FilterBar = () => {
     
     if (order !== e.target.value) {
       dispatch(sortCountries(e.target.value))
-      setOrder(e.target.value)
+      setOrder([e.target.value])
     }else {
-      //dispatch(getCountries())
       setOrder('disorder')
+      dispatch(sortCountries('disorder'))
     }
   };
   
   const filterByActivity = (e) => {
     e.preventDefault()
-    if (activities.includes(e.target.value)) {
+    dispatch(removeFilter('activity'))
+    if (e.target.value === 'all' && e.target.value === activity) {
+      setActivity('')
+    } else if (e.target.value !== 'all' && e.target.value !== activity) {
       dispatch(filterCountriesByActivity(e.target.value))
-    }else {
-      //dispatch(getCountries())
+      setActivity(e.target.value)
     }
   }
+  
 
   const filterByContinent = (e) => {
     e.preventDefault()
-    if (e.target.value === 'all') {
-      console.log(e.target.value)
-      //dispatch(getCountries())
-    }else{
+    dispatch(removeFilter('continent'))
+    if (e.target.value === 'all' && e.target.value === continent) {
+      setContinent('')
+    } else if (e.target.value !== 'all' && e.target.value !== continent) {
       dispatch(filterCountriesByContinent(e.target.value))
+      setContinent(e.target.value)
     }
   }
   
@@ -54,7 +60,7 @@ const FilterBar = () => {
             <option value="lessPopulation" >↓ Population</option>
           </select>
           <select name="" id="" onChange={filterByActivity}>
-            <option value="Default">Filter By</option>
+          <option value="all">Filter By Activity</option>
             {activities.map((activity) => (
               <option value={activity}>{activity}</option>
             ))}

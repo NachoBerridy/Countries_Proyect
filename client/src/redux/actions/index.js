@@ -1,4 +1,9 @@
-import {GET_COUNTRIES, POST_ACTIVITIES, FILTER_COUNTRIES_BY_ACTIVITY, FILTER_COUNTRIES_BY_CONTINENT, SORT_COUNTRIES, GET_ACTIVITIES} from './types.js'
+import {GET_COUNTRIES, 
+        POST_ACTIVITIES, 
+        FILTER_COUNTRIES_BY_ACTIVITY, 
+        FILTER_COUNTRIES_BY_CONTINENT, 
+        SORT_COUNTRIES, GET_ACTIVITIES, 
+        REMOVE_FILTER} from './types.js'
 import axios from "axios"
 
 export function getCountries(){
@@ -36,6 +41,13 @@ export function filterCountriesByActivity(payload){
 export function filterCountriesByContinent(payload){
   return {
     type: FILTER_COUNTRIES_BY_CONTINENT,
+    payload
+  }
+}
+
+export function removeFilter(payload){
+  return {
+    type: REMOVE_FILTER,
     payload
   }
 }

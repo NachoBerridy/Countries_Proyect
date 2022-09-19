@@ -12,7 +12,7 @@ const Countries = () => {
   const countries = useSelector((state) => state.filteredCountries);
   const [firstCountry, setFirstCountry] = useState(0);
   const [lastCountry, setLastCountry] = useState(9);
-  const [buttons, setButtons] = useState([]);
+
   useEffect(() => {
     dispatch(getCountries())
     dispatch(getActivities());
@@ -20,11 +20,8 @@ const Countries = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    let arr = []
-    for (let i = 0; i < countries.length /10; i++) {
-      arr.push(i)
-    }
-    setButtons(arr);
+    console.log(countries.length)
+    
   }, [countries]);
 
   const paginate = (number) => {
