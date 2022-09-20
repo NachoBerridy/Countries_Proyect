@@ -6,6 +6,7 @@ import FilterBar from "../filterBar/filterBar.jsx"
 import { getCountries, sortCountries, searchCountry} from "../../redux/actions"
 import Pagination from "../pagination/pagination.jsx"
 import style from './home.module.css'
+import { Link  } from "react-router-dom"
 
 
 const Home = () => {
@@ -81,6 +82,10 @@ const Home = () => {
             <option value="morePopulation" >↑ Population</option>
             <option value="lessPopulation" >↓ Population</option>
       </select>
+        <img src="moto.svg" alt="qwe" />
+      <Link to= '/createActivity' className={style.post}>
+        <h3>Create Activity</h3>
+      </Link>  
       <FilterBar />
       <Pagination countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
       <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>                            

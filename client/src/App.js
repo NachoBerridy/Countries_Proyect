@@ -14,7 +14,6 @@ function  App(){
         <LandingPage/> 
       </Route>
       <Route exact path="/Home"> 
-        <Link to= '/createActivity'>Create Activity</Link>  
         <Home/>
       </Route>
       <Route exact path="/countries/:countryName">
