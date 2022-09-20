@@ -20,28 +20,27 @@ const Country = () => {
   }, [countryName]);
 
   console.log("🚀 ~ file: country.jsx ~ line 7 ~ Country ~ country", country)
+  
   return (
-      <div>
-      <h1>{country.name}</h1>
-      <p>Capital: {country.capital}</p>
-      <p>Population: {country.population}</p>
-      <p>Area: {country.area}</p>
-      <p>Subregion: {country.subregion}</p>
-      <p>Continent: {country.continent}</p>
-      <h3>Activities</h3>
-      <ul>
-        {country.activities?.map((activity) => (
-          <li>
-            <h4>{activity.name}</h4>
-            <p>{activity.difficulty}</p>
-            <p>{activity.duration}</p>
-            <p>{activity.season}</p>
-          </li>
-        ))}
-      </ul>
-      <img src={country.flag} alt="Country Flag" width="200" />
-
-      </div>
+    <div>
+        <h1>{country.name}</h1>
+        <p>Capital: {country.capital}</p>
+        <p>Population: {country.population}</p>
+        <p>Area: {country.area}</p>
+        <p>Subregion: {country.subregion}</p>
+        <p>Continent: {country.continent}</p>
+        <ul>
+          {country.activities?.map((activity) => (
+            <li>
+              <h4>{activity.name}</h4>
+              <p>{activity.difficulty}</p>
+              <p>{activity.duration}</p>
+              <p>{activity.season}</p>
+            </li>
+          ))}
+        </ul>
+        <img src={country.flag} alt="Country Flag" width="200" />
+    </div>
   );
 }
 

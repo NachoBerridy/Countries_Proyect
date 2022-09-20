@@ -1,45 +1,20 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useSelector,useDispatch } from "react-redux";
+import { useEffect } from "react";
 import CountryCard from "../countryCard/countryCard";
-import FilterBar from "../filterBar/filterBar.jsx";
-import { getCountries, getActivities} from "../../redux/actions";
-import Pagination from "../pagination/pagination.jsx";
+import styles from './countries.module.css'
 
 
-const Countries = () => {
-  const dispatch = useDispatch();
-  const countries = useSelector((state) => state.filteredCountries);
-  const [firstCountry, setFirstCountry] = useState(0);
-  const [lastCountry, setLastCountry] = useState(9);
+const Countries = ({countries, firstCountry, lastCountry}) => {
 
   useEffect(() => {
-    dispatch(getCountries())
-    dispatch(getActivities());
-
-  }, [dispatch]);
-
-  useEffect(() => {
-    console.log(countries.length)
-    
-  }, [countries]);
-
-  const paginate = (number) => {
-    setFirstCountry(number * 10);
-    setLastCountry((number + 1) * 10);
-  };
-
+  }, [countries, countries.length, firstCountry, lastCountry]);
+  
   return (
-    <div>
-      <h1>Countries</h1>
-      <FilterBar/>
-      <Pagination countriesPerPage={10} totalCountries={countries.length} paginate = {paginate}/>
-      <div className="countries">
-        {countries.slice(firstCountry,lastCountry).map((country) => (
-            <CountryCard country={country}/>
-        ))}
+      <div className={styles.countries}>
+        {countries.length?countries.slice(firstCountry,lastCountry).map((country) => (
+          <CountryCard country={country}/>
+        )): <h1>Loading...</h1>}
       </div>
-    </div>
   );
 }
 

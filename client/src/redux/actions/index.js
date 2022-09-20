@@ -3,7 +3,8 @@ import {GET_COUNTRIES,
         FILTER_COUNTRIES_BY_ACTIVITY, 
         FILTER_COUNTRIES_BY_CONTINENT, 
         SORT_COUNTRIES, GET_ACTIVITIES, 
-        REMOVE_FILTER} from './types.js'
+        REMOVE_FILTER,
+        SEARCH_COUNTRY} from './types.js'
 import axios from "axios"
 
 export function getCountries(){
@@ -28,6 +29,13 @@ export function getActivities (){
 export function sortCountries(payload){
   return {
     type: SORT_COUNTRIES,
+    payload
+  }
+}
+
+export function searchCountry(payload){
+  return {
+    type: SEARCH_COUNTRY,
     payload
   }
 }

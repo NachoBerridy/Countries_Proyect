@@ -3,14 +3,14 @@ import {  GET_COUNTRIES,
           FILTER_COUNTRIES_BY_ACTIVITY, 
           SORT_COUNTRIES, GET_ACTIVITIES, 
           FILTER_COUNTRIES_BY_CONTINENT, 
-          REMOVE_FILTER} from '../actions/types.js';
+          REMOVE_FILTER,
+          SEARCH_COUNTRY} from '../actions/types.js';
 const initialState = {
     countries: [],
     filteredCountries: [],
-    filterByActivities: [],
-    filterByContinent : [],
     activities: []
 }
+
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -19,44 +19,36 @@ const rootReducer = (state = initialState, action) => {
                 ...state,
                 countries: action.payload,
                 filteredCountries: action.payload,
-                filterByActivities: action.payload,
-                filterByContinent: action.payload
             }
         case GET_ACTIVITIES:
             return {
                 ...state,
                 activities: action.payload
             }
+        case SEARCH_COUNTRY:
+                return {
+                    ...state,
+                    filteredCountries: state.countries.filter(c => c.name.toLowerCase().includes(action.payload.toLowerCase()))
+                }
         case FILTER_COUNTRIES_BY_ACTIVITY:
             return {
                 ...state,
-                filterByActivities: state.filteredCountries.filter(c => c.activities.map(a => a.name).includes(action.payload)),
-                filteredCountries: state.filterByContinent.filter(c => state.filterByActivities.includes(c))
+                filteredCountries: state.filterByContinent.filter(c => c.activities.map(a => a.name).includes(action.payload))
             }
         case FILTER_COUNTRIES_BY_CONTINENT:
             return {
                 ...state,
-                filterByContinent: state.countries.filter(c => c.continent === action.payload),
-                filteredCountries: state.filterByContinent.filter(c => state.filterByActivities.includes(c))
+                filteredCountries: state.countries.filter(c => c.continent === action.payload),
             }
         case REMOVE_FILTER:
-            if(action.payload === 'activity'){
                 return {
                     ...state,
-                    filterByActivities: state.countries,
-                    filteredCountries: state.filterByContinent.filter(c => state.filterByActivities.includes(c))
+                    filteredCountries: state.countries
                 }
-            }
-            if(action.payload === 'continent'){
-                return {
-                    ...state,
-                    filterByContinent: state.countries,
-                    filteredCountries: state.filterByContinent.filter(c => state.filterByActivities.includes(c))
-                }
-            }
-            break
         case SORT_COUNTRIES:
+            console.log('Ordenando por', action.payload)
             switch (action.payload) {
+                
                 case 'A-Z':
                     return {
                         ...state,
@@ -113,10 +105,7 @@ const rootReducer = (state = initialState, action) => {
                 default:
                     break;
             }
-            return{
-              ...state,
-              filteredCountries: state.filterByContinent.filter(c => state.filterByActivities.includes(c))
-            }
+            break
         case POST_ACTIVITIES:
             return {
                 ...state,
