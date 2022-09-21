@@ -1,0 +1,22 @@
+.div {
+  background-image: url("./estampas.svg");
+  background-size: 100vh;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.div .Link {
+  text-decoration: none;
+  color: white;
+  font-size: 3rem;
+  font-weight: bold;
+  padding: 0.5rem;
+  background: rgba(162, 41, 107, 0.85);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(9.3px);
+  -webkit-backdrop-filter: blur(9.3px);
+  border: 1px solid rgba(162, 41, 107, 0.34);
+}/*# sourceMappingURL=landingPage.module.css.map */

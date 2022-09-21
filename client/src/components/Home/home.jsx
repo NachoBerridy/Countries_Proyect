@@ -7,6 +7,7 @@ import { getCountries, sortCountries, searchCountry} from "../../redux/actions"
 import Pagination from "../pagination/pagination.jsx"
 import style from './home.module.css'
 import { Link  } from "react-router-dom"
+import moto from './moto.svg'
 
 
 const Home = () => {
@@ -20,7 +21,6 @@ const Home = () => {
     dispatch(getCountries())
   }, [dispatch])
 
-  const [country, setCountry] = useState('')
   const [order, setOrder] = useState('disorder')
   
   const ordenar = (e) => {
@@ -42,20 +42,6 @@ const Home = () => {
     setLastCountry((number + 1) * 10)
     setPage(number + 1)
   }
-
-  const handleChange = (e) => {
-    e.preventDefault()
-    setCountry(e.target.value)
-  }
-
-  const handleSearch = (e) => {
-    e.preventDefault()
-    try{
-      dispatch(searchCountry(country))
-    }catch(err){
-      alert('Country not found')
-    }
-  }
   
 
   useEffect(() => {
@@ -71,23 +57,23 @@ const Home = () => {
   return (
     <div className={style.container}>
       <h1>Countries</h1>
-      <form action="" method="get">
-            <input type="search" name="" id="" value={country} onChange={handleChange}/>
-            <button type="submit" onClick={handleSearch}>Search</button>
-      </form>
-      <select name="" id="" onChange={ordenar}>
-            <option value="disorder">Sort By</option>
-            <option value="A-Z" >↑ A-Z</option>
-            <option value="Z-A" >↓ Z-A</option>
-            <option value="morePopulation" >↑ Population</option>
-            <option value="lessPopulation" >↓ Population</option>
-      </select>
-        <img src="moto.svg" alt="qwe" />
       <Link to= '/createActivity' className={style.post}>
+        <img src={moto} alt="qwe" />
         <h3>Create Activity</h3>
       </Link>  
-      <FilterBar />
-      <Pagination countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
+      <div>
+        <FilterBar />
+        <div className={style.nav}>
+          <select name="" id="" onChange={ordenar}>
+                <option value="disorder">Sort By</option>
+                <option value="A-Z" >↑ A-Z</option>
+                <option value="Z-A" >↓ Z-A</option>
+                <option value="morePopulation" >↑ Population</option>
+                <option value="lessPopulation" >↓ Population</option>
+          </select>
+          <Pagination className={style.pagination} countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
+        </div>
+      </div>
       <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>                            
     </div>
   )

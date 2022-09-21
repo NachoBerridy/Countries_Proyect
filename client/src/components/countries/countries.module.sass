@@ -1,7 +1,16 @@
 .countries
     display: grid
-    grid-template-columns: repeat(5, 0.2fr)
+    width: 90vw
+    grid-template-columns: repeat(4, 0.25fr)
     grid-template-rows: repeat(auto, 1fr)
     grid-gap: 1rem
     margin: 0 auto
     padding: 0 1rem
+    justify-content: center
+    align-content: center
+
+    @media (max-width: 768px)
+        grid-template-columns: repeat(2, 0.5fr) 
+    @media (max-width: 480px)
+        display: flex
+        flex-direction: column

@@ -1,6 +1,6 @@
 .container {
-  height: 40vh;
-  width: 15vw;
+  height: 50vh;
+  width: 20vw;
   margin: 0em 1em 1em 1em;
   background: rgba(13, 13, 13, 0.32);
   border-radius: 16px;
@@ -15,8 +15,33 @@
   justify-content: center;
   align-items: center;
 }
+.container img {
+  width: 80%;
+  height: 40%;
+  border-radius: 0px;
+  border: 0px solid rgba(13, 13, 13, 0.3);
+  box-shadow: 0 0px 0px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+}
+@media (max-width: 768px) {
+  .container {
+    width: 30vw;
+    height: 30vh;
+    margin: 0em 1em 1em 1em;
+  }
+}
+@media (max-width: 480px) {
+  .container {
+    width: 90vw;
+    height: 70vh;
+    margin: 0em 0em 0em 0em;
+    border-radius: 1.5em;
+  }
+}
 
 .container:hover {
   color: #1f1e1e;
-  background: rgba(255, 255, 255, 0.32);
+  box-shadow: 0 0 30px #54918A;
+  background: rgba(200, 200, 200, 0.32);
 }/*# sourceMappingURL=countryCard.module.css.map */

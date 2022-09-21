@@ -2,13 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { getCountries } from "../../redux/actions/index.js";
 import { useSelector, useDispatch } from "react-redux";
+import style from './landingPage.module.css'
 
 const LandingPage = () => {
     const dispatch = useDispatch();
     dispatch(getCountries());
     return (
-        <div>
-            <Link to= '/Home'>Home</Link>
+        <div className={style.div}>
+            <Link to= '/Home' className={style.Link}>
+                HOME
+            </Link>
         </div>
     );
 }

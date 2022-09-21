@@ -1,0 +1,25 @@
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+nav button {
+  display: flex;
+  height: 4vh;
+  background-color: #70C1B8;
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+}
+nav button:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: pointer;
+}/*# sourceMappingURL=pagination.module.css.map */
