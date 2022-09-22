@@ -56,7 +56,7 @@ const Home = () => {
   
   return (
     <div className={style.container}>
-      <h1>Countries</h1>
+      <span className={style.title}>LET'S TRAVEL</span>
       <Link to= '/createActivity' className={style.post}>
         <img src={moto} alt="qwe" />
         <h3>Create Activity</h3>

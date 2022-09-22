@@ -2,8 +2,10 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-
+import style from "./country.module.css";
+import home from "./homeButton.svg";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Country = () => {
   const [country, setCountry] = useState([]);
@@ -22,24 +24,29 @@ const Country = () => {
   console.log("🚀 ~ file: country.jsx ~ line 7 ~ Country ~ country", country)
   
   return (
-    <div>
-        <h1>{country.name}</h1>
-        <p>Capital: {country.capital}</p>
-        <p>Population: {country.population}</p>
-        <p>Area: {country.area}</p>
-        <p>Subregion: {country.subregion}</p>
-        <p>Continent: {country.continent}</p>
-        <ul>
-          {country.activities?.map((activity) => (
-            <li>
-              <h4>{activity.name}</h4>
-              <p>{activity.difficulty}</p>
-              <p>{activity.duration}</p>
-              <p>{activity.season}</p>
-            </li>
-          ))}
-        </ul>
-        <img src={country.flag} alt="Country Flag" width="200" />
+    <div className={style.container}>
+      <Link to='/Home' className={style.home}>
+        <img src={home} alt="home" />
+      </Link>
+      <div className={style.card}>
+          <h1>{country.name}</h1>
+          <img src={country.flag} alt="Country Flag" width="200" />
+          <p>Capital: {country.capital}</p>
+          <p>Population: {country.population}</p>
+          <p>Area: {country.area} Km<sup>2</sup></p>
+          <p>Subregion: {country.subregion}</p>
+          <p>Continent: {country.continent}</p>
+          <ul>
+            {country.activities?.map((activity) => (
+              <li>
+                <h4>{activity.name}</h4>
+                <p>{activity.difficulty}</p>
+                <p>{activity.duration}</p>
+                <p>{activity.season}</p>
+              </li>
+            ))}
+          </ul>
+      </div>
     </div>
   );
 }

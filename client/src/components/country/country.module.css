@@ -1,0 +1,38 @@
+.container {
+  background-image: url("./globo.jpg");
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+.container .home {
+  position: fixed;
+  top: 2vh;
+  left: 0;
+  z-index: 10;
+}
+.container .home img {
+  width: 5rem;
+  height: 5rem;
+  margin-left: -1rem;
+}
+.container .card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+  width: 40vw;
+  background: rgb(28, 48, 46);
+  background: linear-gradient(0deg, rgb(28, 48, 46) 0%, rgb(9, 109, 121) 50%, rgb(112, 193, 184) 100%);
+  color: white;
+  border-radius: 4vh;
+}
+.container .card img {
+  height: 20vh;
+  border-radius: 5%;
+  margin-bottom: 2vh;
+}/*# sourceMappingURL=country.module.css.map */

@@ -1,1 +1,62 @@
-/*# sourceMappingURL=createActivity.module.css.map */
+.container {
+  background-image: url("./winter.jpg");
+  background-size: cover;
+}
+.container .home {
+  position: fixed;
+  top: 2vh;
+  left: 0;
+  z-index: 10;
+}
+.container .home img {
+  width: 5rem;
+  height: 5rem;
+  margin-left: -1rem;
+}
+.container .container1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: rgba(156, 156, 156, 0.2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(156, 156, 156, 0.3);
+}
+.container .container1 .form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  height: 80vh;
+  border: 1px solid black;
+  border-radius: 4vh;
+  background: rgb(28, 48, 46);
+  background: linear-gradient(151deg, rgb(28, 48, 46) 0%, rgb(9, 109, 121) 50%, rgb(112, 193, 184) 100%);
+  color: white;
+}
+.container .container1 .form input {
+  color: rgb(100, 100, 100);
+  width: 80%;
+  height: 5vh;
+  margin: 1vh;
+  border: 1px solid #000;
+  border-radius: 2vh;
+  padding: 1vh;
+  font-size: 2vh;
+}
+.container .container1 .form .select {
+  width: 80%;
+  height: 5vh;
+  margin: 2vh;
+  margin-bottom: 2vh;
+  font-size: 2vh;
+}
+.container .container1 .form p {
+  color: red;
+  font-size: 2vh;
+}/*# sourceMappingURL=createActivity.module.css.map */
