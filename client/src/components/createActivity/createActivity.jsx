@@ -12,6 +12,7 @@ export default function CreateActivity() {
 
   let dispatch = useDispatch()
   let countriesList = useSelector(state => state.countries)
+  let [submit, setSubmit] = React.useState(true)
   let [errors, setErrors] = React.useState({
     name: "",
     difficulty: "",
@@ -19,9 +20,6 @@ export default function CreateActivity() {
     season: "",
     countries: ""
   }) 
-  /* const options = countriesList.map((country) => {
-    return {value: country.key, label: country.name}
-  }) */
 
   
   let [input, setInput] = React.useState({
@@ -36,12 +34,16 @@ export default function CreateActivity() {
   
   let handleChange = (e) => {
     e.preventDefault()
-    validate()
+    console.log(e.target.value)
     setInput((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
-      }))
-    }
+      })) 
+    setErrors(validate({
+      ...input,
+      [e.target.name]: e.target.value,
+    }))
+  }
 
   let handleSelect = (e) => {
     setInput((prev) => ({
@@ -57,72 +59,30 @@ export default function CreateActivity() {
   }
 
   
-  const validate = () => {
-    
-    const seasons = ['summer', 'winter', 'autumn', 'spring']
+  const validate = (input) => {
+    let err = {}
     if (!input.name || input.name.length < 3) {
-      setErrors((prev) => ({
-        ...prev,
-        name: "Name must be at least 3 characters long"
-      }))
-    }else {
-      setErrors((prev) => ({
-        ...prev,
-        name: ""
-      }))
+      err.name = "Name must have at least 3 characters"
     }
     if (!input.difficulty || input.difficulty < 1 || input.difficulty > 5) {
-      setErrors((prev) => ({
-        ...prev,
-        difficulty: "Difficulty must be between 1 and 5"
-      }))
-    }else{
-      setErrors((prev) => ({
-        ...prev,
-        difficulty: ""
-      }))
+      err.difficulty = "Difficulty must be between 1 and 5"
     }
     if (!input.duration || input.duration < 1 || input.duration > 24) {
-  
-      setErrors((prev) => ({
-        ...prev,
-        duration: "Duration is required"
-      }))
-    }else{
-      setErrors((prev) => ({
-        ...prev,
-        duration: ""
-      }))
-    }
-    if (!input.season || !seasons.includes(input.season.toLowerCase())) {
-      setErrors((prev) => ({
-        ...prev,
-        season: "Season is required"
-      }))
-    }else {
-      setErrors((prev) => ({
-        ...prev,
-        season: ""
-      }))
+      err.duration = "Duration must be between 1 and 24"
     }
     if (!input.countries) {
-      setErrors((prev) => ({
-        ...prev,
-        countries: "Countries is required"
-      }))
-    }else{
-      setErrors((prev) => ({
-        ...prev,
-        countries: ""
-      }))
+      err.countries = "You must select at least one country"
     }
+    if ( err=== {} ) {
+      setSubmit(false)
+    }
+    return err
   }
 
   useEffect(() => {
   }, [errors,input])
 
   return (
-   
     <div className={style.container}>
       <Link to='/Home' className={style.home}>
         <img src={home} alt="home" />
@@ -157,14 +117,12 @@ export default function CreateActivity() {
             onChange={(e) => handleChange(e)}
           />
           {errors.duration? <p>{errors.duration}</p> : null}
-          <input
-            placeholder="Season"
-            type="text"
-            name="season"
-            key="season"
-            value={input.season}
-            onChange={(e) => handleChange(e)}
-          />
+          <Select className={style.select} placeholder='Season'>
+
+            {['summer', 'winter', 'autumn', 'spring'].map((season) => {
+              return <option value={season}>{season}</option>
+            })}
+          </Select>
           {errors.season? <p>{errors.season}</p> : null}
           <Select 
             className={style.select}
@@ -178,7 +136,7 @@ export default function CreateActivity() {
             onChange={(e) => handleSelect(e)}
           />
           {errors.countries? <p>{errors.countries}</p> : null}
-          <input type="submit" value= 'Create Activity'/>
+          <input type="submit" disabled = {submit} value= 'Create Activity'/>
         </form>
       </div>
     </div>
