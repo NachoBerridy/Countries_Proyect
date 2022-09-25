@@ -38,12 +38,13 @@ const Country = () => {
           <p>Continent: {country.continent}</p>
           <ul>
             {country.activities?.map((activity) => (
-              <li>
+              <div className={style.activity}>
                 <h4>{activity.name}</h4>
                 <p>{activity.difficulty}</p>
                 <p>{activity.duration}</p>
                 <p>{activity.season}</p>
-              </li>
+                <img src={activity.image} alt="i" />
+              </div>
             ))}
           </ul>
       </div>

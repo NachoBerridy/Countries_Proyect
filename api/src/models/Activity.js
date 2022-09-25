@@ -24,6 +24,10 @@ const activity = (sequelize) => {
     season: {
       type: DataTypes.STRING,
       allowNull: false,
+    },
+    image:{
+      type: DataTypes.STRING,
+      allowNull: false,
     }
   });
 

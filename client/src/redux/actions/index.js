@@ -67,7 +67,8 @@ export function createActivity(activity){
     difficulty: activity.difficulty,
     duration: activity.duration,
     season: activity.season,
-    countryId: activity.countries
+    countryId: activity.countries,
+    image: activity.image
   } 
 
   return async function (dispatch){

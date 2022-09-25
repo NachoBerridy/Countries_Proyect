@@ -4,12 +4,13 @@ const { Country, Activity } = conn.models
 
 const postActivity = async (req, res) => {
     try {
-        const { name, difficulty, duration, season, countryId } = req.body;
+        const { name, difficulty, duration, season, image, countryId } = req.body;
         const newActivity = await Activity.create({
         name,
         difficulty,
         duration,
         season,
+        image,
         })
         //cargar la actividad en el pais
         console.log(countryId)

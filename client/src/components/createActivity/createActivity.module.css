@@ -1,6 +1,11 @@
 .container {
   background-image: url("./winter.jpg");
   background-size: cover;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .container .home {
   position: fixed;
@@ -15,28 +20,45 @@
 }
 .container .container1 {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  height: 100vh;
-  width: 100vw;
 }
 .container .container1 .form {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  width: 40vw;
+  width: 50vw;
   height: 80vh;
+  padding: 0;
+  gap: 0;
   border: 1px solid black;
   border-radius: 4vh;
   background: rgb(28, 48, 46);
   background: linear-gradient(151deg, rgb(28, 48, 46) 0%, rgb(9, 109, 121) 50%, rgb(112, 193, 184) 100%);
   color: white;
 }
+.container .container1 .form .column2 {
+  width: 25vw;
+}
+.container .container1 .form .column2 img {
+  width: 20vw;
+  border-radius: 5%;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+.container .container1 .form .column1 {
+  width: 25vw;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 .container .container1 .form input {
   color: rgb(100, 100, 100);
-  width: 80%;
+  width: 20vw;
   height: 5vh;
   margin: 1vh;
   border: 1px solid #000;
@@ -45,11 +67,12 @@
   font-size: 2vh;
 }
 .container .container1 .form .select {
-  width: 80%;
+  width: 20vw;
   height: 5vh;
   margin: 2vh;
   margin-bottom: 2vh;
   font-size: 2vh;
+  color: #000000;
 }
 .container .container1 .form p {
   color: red;

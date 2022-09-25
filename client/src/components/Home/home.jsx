@@ -65,11 +65,11 @@ const Home = () => {
         <FilterBar />
         <div className={style.nav}>
           <select name="" id="" onChange={ordenar}>
-                <option value="disorder">Sort By</option>
-                <option value="A-Z" >↑ A-Z</option>
-                <option value="Z-A" >↓ Z-A</option>
-                <option value="morePopulation" >↑ Population</option>
-                <option value="lessPopulation" >↓ Population</option>
+            <option value="disorder">Sort By</option>
+            <option value="A-Z" >↑ A-Z</option>
+            <option value="Z-A" >↓ Z-A</option>
+            <option value="morePopulation" >↑ Population</option>
+            <option value="lessPopulation" >↓ Population</option>
           </select>
           <Pagination className={style.pagination} countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
         </div>

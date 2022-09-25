@@ -4,6 +4,25 @@
   justify-content: center;
   align-items: center;
   width: 100vw;
+  margin-bottom: 5rem;
+}
+.bar .filters {
+  width: 80vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.bar .filters .continents {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+.bar .filters .continents input {
+  height: 5rem;
+}
+.bar .filters .continents input:hover {
+  scale: 1.1;
+  transition: all 0.5s ease;
 }
 .bar .filters select {
   background-color: #70C1B8;
