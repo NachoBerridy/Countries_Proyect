@@ -27,8 +27,11 @@
         padding: 0
         margin-bottom: 1rem
 
+    @media (max-width: 1024px)
+        grid-template-columns: repeat(3, 0.3fr)
     @media (max-width: 768px)
         grid-template-columns: repeat(2, 0.5fr) 
     @media (max-width: 480px)
         display: flex
         flex-direction: column
+        

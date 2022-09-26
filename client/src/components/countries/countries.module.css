@@ -29,6 +29,11 @@
   padding: 0;
   margin-bottom: 1rem;
 }
+@media (max-width: 1024px) {
+  .countries {
+    grid-template-columns: repeat(3, 0.3fr);
+  }
+}
 @media (max-width: 768px) {
   .countries {
     grid-template-columns: repeat(2, 0.5fr);

@@ -17,4 +17,4 @@ export default function About() {
             <h4>Created By: Ignacio Berridy</h4>
         </div>
     );
-    }
+}

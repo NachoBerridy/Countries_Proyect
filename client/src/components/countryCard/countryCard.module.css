@@ -24,6 +24,16 @@
   backdrop-filter: blur(0px);
   -webkit-backdrop-filter: blur(0px);
 }
+@media (max-width: 1020px) {
+  .container {
+    width: 25vw;
+    height: 20vh;
+  }
+  .container img {
+    width: 80%;
+    height: 40%;
+  }
+}
 @media (max-width: 768px) {
   .container {
     width: 30vw;

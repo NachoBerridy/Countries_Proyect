@@ -63,4 +63,44 @@
 .bar .filters .remove:hover {
   transparence: 0.5;
   transition: all 0.5s ease;
+}
+@media (max-width: 1024px) {
+  .bar .filters {
+    flex-direction: column;
+    align-items: center;
+  }
+  .bar .filters div {
+    margin: 0.5rem 0;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .bar .filters div input {
+    width: 100%;
+    margin: 0;
+  }
+  .bar .filters div select {
+    width: 100%;
+    margin: 0;
+  }
+  .bar .filters .continents {
+    width: 100%;
+    justify-content: space-around;
+  }
+  .bar .filters .continents input {
+    width: 100%;
+    margin: 0;
+  }
+}
+@media (max-width: 768px) {
+  .bar .continents input {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .bar .continents {
+    display: none;
+  }
+  .bar .continents img {
+    display: none;
+  }
 }/*# sourceMappingURL=filterBar.module.css.map */

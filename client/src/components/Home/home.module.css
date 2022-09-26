@@ -78,4 +78,18 @@
 .container .post:hover {
   scale: 1.1;
   transition: all 0.5s ease;
+}
+@media (max-width: 480px) {
+  .container {
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
+    align-content: start;
+  }
+  .container .title {
+    font-size: 10vw;
+  }
 }/*# sourceMappingURL=home.module.css.map */
