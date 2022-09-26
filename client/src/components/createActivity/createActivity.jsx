@@ -57,13 +57,13 @@ export default function CreateActivity() {
     let handleSubmit = (e) => {
       e.preventDefault()
       
-      console.log("🚀 ~ file: createActivity.jsx ~ line 16 ~ CreateActivity ~ input", JSON.stringify(input))
       if (input.image === "") {
-        setInput((prev) => ({
+         setInput((prev) => ({
           ...prev,
           image: defaultImage
         }))
       }
+      console.log("🚀 ~ file: createActivity.jsx ~ line 16 ~ CreateActivity ~ input", JSON.stringify(input))
       dispatch(createActivity(input))
   }
 
@@ -99,7 +99,7 @@ export default function CreateActivity() {
         <img src={home} alt="home" />
       </Link>
       <div className={style.container1}>
-        <form onSubmit={e => handleSubmit(e)} className={style.form}>
+        <form onSubmit={e => handleSubmit(e)} className={style.form} >
           <div className={style.column1}>
             <h2>Create Activity</h2>
             <input

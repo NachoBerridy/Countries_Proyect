@@ -5,6 +5,7 @@
   align-items: center;
   width: 100vw;
   margin-bottom: 5rem;
+  box-sizing: border-box;
 }
 .bar .filters {
   width: 80vw;
@@ -12,13 +13,19 @@
   flex-direction: row;
   justify-content: space-between;
 }
+.bar .filters div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 .bar .filters .continents {
   display: flex;
   flex-direction: row;
   gap: 1rem;
 }
 .bar .filters .continents input {
-  height: 5rem;
+  height: 4.5rem;
 }
 .bar .filters .continents input:hover {
   scale: 1.1;
@@ -29,13 +36,31 @@
   color: white;
   border: none;
   border-radius: 0.5rem;
-  padding: 0.5rem;
+  padding: 0.3rem;
   margin: 0rem 0.5rem 0.5rem 0.5rem;
   font-size: 1.2rem;
   outline: none;
   cursor: pointer;
 }
 .bar .filters select:hover {
+  transparence: 0.5;
+  transition: all 0.5s ease;
+}
+.bar .filters .remove {
+  background-color: #c17070;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
+  font-size: 1.2rem;
+  outline: none;
+  cursor: pointer;
+}
+.bar .filters .remove:disabled {
+  background-color: #c0bebe;
+}
+.bar .filters .remove:hover {
   transparence: 0.5;
   transition: all 0.5s ease;
 }/*# sourceMappingURL=filterBar.module.css.map */

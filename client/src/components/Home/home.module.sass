@@ -9,9 +9,13 @@
     height: 225vh
     .title
         font-size: 5vw
+        font-family: 'Anton', sans-serif
         font-weight: bold
-        //-webkit-background-clip: text
-        //-webkit-text-fill-color: transparent
+        background-image: url('../../assets/travel22.jpg')
+        background-size: cover
+        background-position: center
+        -webkit-background-clip: text
+        -webkit-text-fill-color: transparent
     .nav
         display: flex
         flex-direction: row
@@ -30,15 +34,20 @@
             border: none
             font-size: 1.5rem
             font-weight: bold
-            border-radius: 0.5rem
+            border-radius: 0.2rem
             &:hover
                 background-color: rgba(0, 0, 0, 0.8)
                 cursor: pointer
             option
+                text-emphasis: none
                 background-color: rgba(0, 0, 0, 0.5)
                 color: white
                 font-size: 1.5rem
                 font-weight: bold
+                &:hover
+                    // background-color: rgba(0, 0, 0, 0.8)
+                    background-color: white
+                    cursor: pointer
     .post
         position: fixed
         bottom: 1rem

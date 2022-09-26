@@ -5,17 +5,23 @@
     align-items: center
     width: 100vw
     margin-bottom: 5rem
+    box-sizing: border-box
     .filters
         width: 80vw
         display: flex
         flex-direction: row
         justify-content: space-between
+        div
+            display: flex
+            flex-direction: row
+            justify-content: space-between
+            align-items: center
         .continents
             display: flex
             flex-direction: row
             gap: 1rem
             input
-                height: 5rem
+                height: 4.5rem
                 &:hover
                     scale: 1.1
                     transition: all 0.5s ease
@@ -24,11 +30,26 @@
             color: white
             border: none
             border-radius: 0.5rem
-            padding: 0.5rem
+            padding: 0.3rem
             margin: 0.0rem 0.5rem 0.5rem 0.5rem
             font-size: 1.2rem
             outline: none
             cursor: pointer
+            &:hover
+                transparence: 0.5
+                transition: all 0.5s ease
+        .remove
+            background-color: #c17070
+            color: white
+            border: none
+            border-radius: 0.5rem
+            padding: 0.3rem
+            margin: 0.0rem 0.5rem 0.5rem 0.5rem
+            font-size: 1.2rem
+            outline: none
+            cursor: pointer
+            &:disabled
+                background-color: #c0bebe
             &:hover
                 transparence: 0.5
                 transition: all 0.5s ease

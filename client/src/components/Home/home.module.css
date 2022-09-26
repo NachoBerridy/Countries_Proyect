@@ -7,7 +7,13 @@
 }
 .container .title {
   font-size: 5vw;
+  font-family: "Anton", sans-serif;
   font-weight: bold;
+  background-image: url("../../assets/travel22.jpg");
+  background-size: cover;
+  background-position: center;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 .container .nav {
   display: flex;
@@ -28,17 +34,23 @@
   border: none;
   font-size: 1.5rem;
   font-weight: bold;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
 }
 .container .nav select:hover {
   background-color: rgba(0, 0, 0, 0.8);
   cursor: pointer;
 }
 .container .nav select option {
+  -webkit-text-emphasis: none;
+          text-emphasis: none;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   font-size: 1.5rem;
   font-weight: bold;
+}
+.container .nav select option:hover {
+  background-color: white;
+  cursor: pointer;
 }
 .container .post {
   position: fixed;

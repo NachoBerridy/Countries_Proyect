@@ -20,6 +20,7 @@ const FilterBar = () => {
   const dispatch = useDispatch()
   const activities = useSelector((state) => state.activities).map(a => a.name)
   const continents = useSelector(state => state.countries).map(c => c.continent).filter((v, i, a) => a.indexOf(v) === i)
+  const [remove, setRemove] = React.useState(true)
   
   useEffect(() => {
     dispatch(getActivities())
@@ -27,10 +28,11 @@ const FilterBar = () => {
   
   const filterByActivity = (e) => {
     e.preventDefault()
-    if (e.target.value === 'all') {
+    if (e.target.value === 'all' || e.target.value === 'Remove Filters') {
       dispatch(removeFilter())
     } else if (e.target.value !== 'all') {
       dispatch(filterCountriesByActivity(e.target.value))
+      setRemove(false)
     }
   }
   
@@ -40,9 +42,10 @@ const FilterBar = () => {
     e.preventDefault()
     if (e.target.value === 'all') {
       dispatch(removeFilter())
+      setRemove(true)
     } else if (e.target.value !== 'all') {
-
       dispatch(filterCountriesByContinent(e.target.value))
+      setRemove(false)
     }
   }
 
@@ -60,18 +63,21 @@ const FilterBar = () => {
             <input type="image" src={oceania} value = 'Oceania' alt="oceania" onClick={filterByContinent}/>
             <input type="image" src={antartica} value = 'Antarctica' alt="antartica" onClick={filterByContinent}/>
           </div>
-          <select name="" id="" onChange={filterByActivity}>
-            <option value="all">Filter By Activity</option>
-              {activities.length?activities.map((activity) => (
-                <option value={activity}>{activity}</option>
+          <div>
+            <select name="" id="" onChange={filterByActivity}>
+              <option value="all">Filter By Activity</option>
+                {activities.length?activities.map((activity) => (
+                  <option value={activity}>{activity}</option>
+                )):null}
+            </select>
+            <select name="" id="" onChange={filterByContinent}>
+              <option value="all">Filter By Continent</option>
+              {continents.length?continents.map((continent) => (
+                <option value={continent}>{continent}</option>
               )):null}
-          </select>
-          <select name="" id="" onChange={filterByContinent}>
-            <option value="all">Filter By Continent</option>
-            {continents.length?continents.map((continent) => (
-              <option value={continent}>{continent}</option>
-            )):null}
-          </select>
+            </select>
+            <input type='button' value='Remove Filters' onClick={filterByActivity} className={style.remove} disabled={remove}/>
+          </div>
         </div>
       </div>
     )

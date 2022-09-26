@@ -60,6 +60,19 @@ const sort = (list, by) => {
             return 0;
         })
     }
+    if (by === 'disorder'){
+        return list.sort((a, b) => {
+            if (a.id > b.id) {
+                return 1;
+            }
+            if (a.id < b.id) {
+                return -1;
+            }
+            return 0;
+        })
+    }
+
+
 }
 
 const rootReducer = (state = initialState, action) => {
@@ -96,10 +109,13 @@ const rootReducer = (state = initialState, action) => {
                 filteredCountries: state.activityFilter.filter(c => c.continent === action.payload)
             }
         case REMOVE_FILTER:
-                return {
-                    ...state,
-                    filteredCountries: state.countries
-                }
+            console.log('remove filter')
+            return {
+                ...state,
+                filteredCountries: state.countries,
+                activityFilter: state.countries,
+                continentFilter: state.countries,
+            }
         case SORT_COUNTRIES:
             console.log('Ordenando por', action.payload)
             return {

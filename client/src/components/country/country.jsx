@@ -37,15 +37,16 @@ const Country = () => {
           <p>Subregion: {country.subregion}</p>
           <p>Continent: {country.continent}</p>
           <ul>
-            {country.activities?.map((activity) => (
+            {country.activities?country.activities.map((activity) => (
               <div className={style.activity}>
-                <h4>{activity.name}</h4>
-                <p>{activity.difficulty}</p>
-                <p>{activity.duration}</p>
-                <p>{activity.season}</p>
-                <img src={activity.image} alt="i" />
+                <h3>{activity.name}</h3>
+                <div>
+                  <p>Difficulty level: {activity.difficulty}</p>
+                  <p>Duration: {activity.duration} weeks</p>
+                  <p>Season: {activity.season}</p>
+                </div>
               </div>
-            ))}
+            )): null}
           </ul>
       </div>
     </div>

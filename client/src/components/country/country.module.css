@@ -35,4 +35,24 @@
   height: 20vh;
   border-radius: 5%;
   margin-bottom: 2vh;
+}
+.container .activity {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 2vh;
+  border-radius: 4vh;
+  width: 25vw;
+  margin-bottom: 2vh;
+  background: rgb(150, 154, 154);
+  background: linear-gradient(90deg, rgb(150, 154, 154) 0%, rgb(56, 66, 65) 50%, rgb(23, 31, 30) 100%);
+}
+.container .activity div {
+  display: flex;
+  flex-direction: column;
+}
+.container .activity h3 {
+  color: #000;
+  text-transform: uppercase;
 }/*# sourceMappingURL=country.module.css.map */
