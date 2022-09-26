@@ -5,7 +5,7 @@ import Select from 'react-select'
 import style from './createActivity.module.css'
 import { useEffect } from "react"
 import { Link } from "react-router-dom"
-import home from './homeButton.svg'
+import home from '../../assets/homeButton.svg'
 
 export default function CreateActivity() {
   
@@ -54,18 +54,34 @@ export default function CreateActivity() {
     }))
   }
 
-    let handleSubmit = (e) => {
-      e.preventDefault()
-      
-      if (input.image === "") {
-         setInput((prev) => ({
-          ...prev,
-          image: defaultImage
-        }))
-      }
-      console.log("🚀 ~ file: createActivity.jsx ~ line 16 ~ CreateActivity ~ input", JSON.stringify(input))
-      dispatch(createActivity(input))
+  let handleSelectSeason = (e) => {
+    setInput((prev) => ({
+      ...prev,
+      season: e.value
+    }))
   }
+
+  let handleSubmit = (e) => {
+    e.preventDefault()
+    if (input.image === "") {
+      setInput((prev) => ({
+        ...prev,
+        image: defaultImage
+      }))
+    }
+    console.log("🚀 ~ file: createActivity.jsx ~ line 16 ~ CreateActivity ~ input", JSON.stringify(input))
+    dispatch(createActivity(input))
+    alert("Activity created successfully!")
+    setInput({
+      name: "",
+      difficulty: 0,
+      duration: 0,
+      season: "",
+      image: "",
+      countries: [],
+    })
+    }
+
 
   
   const validate = (input) => {
@@ -133,6 +149,7 @@ export default function CreateActivity() {
               options ={seasonOptions.map((season) => {
                 return {value: season, label: season}
               })}
+              onChange={(e)=> handleSelectSeason(e)}
             />
             {errors.season? <p>{errors.season}</p> : null}
             <Select 
@@ -147,7 +164,6 @@ export default function CreateActivity() {
                 onChange={(e) => handleSelect(e)}
             />
             {errors.countries? <p>{errors.countries}</p> : null}
-            <input type="submit" disabled = {submit} value= 'Create Activity'/>
           </div>
           <div className={style.column2}>
             {input.image? <img src={input.image} alt="activity"/> : <img src={defaultImage} alt="activity"/>}
@@ -158,6 +174,7 @@ export default function CreateActivity() {
               value={input.image}
               onChange={(e) => handleChange(e)}
               />
+            <input type="submit" disabled = {submit} value= 'Create Activity'/>
           </div>
         </form>
         

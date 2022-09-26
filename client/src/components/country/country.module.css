@@ -1,5 +1,5 @@
 .container {
-  background-image: url("./globo.jpg");
+  background-image: url("../../assets/globo.jpg");
   background-size: cover;
   display: flex;
   flex-direction: column;
@@ -30,11 +30,47 @@
   background: linear-gradient(0deg, rgb(28, 48, 46) 0%, rgb(9, 109, 121) 50%, rgb(112, 193, 184) 100%);
   color: white;
   border-radius: 4vh;
+  position: relative;
 }
 .container .card img {
   height: 20vh;
   border-radius: 5%;
   margin-bottom: 2vh;
+}
+.container .card button {
+  background: transparent;
+  border: none;
+  color: #000000;
+  padding: 1vh 2vw;
+  text-align: center;
+  text-decoration: none;
+  position: absolute;
+  bottom: 1vh;
+  right: 1vw;
+  font-size: 1.5rem;
+  border-radius: 2vh;
+}
+.container .card button img {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+.container .back {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  height: 100%;
+  width: 98%;
+  justify-content: center;
+}
+.container .back::-webkit-scrollbar {
+  height: 0;
+  width: 10px;
+  background: transparent;
+}
+.container .back::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
 }
 .container .activity {
   display: flex;
@@ -43,16 +79,26 @@
   justify-content: space-evenly;
   gap: 2vh;
   border-radius: 4vh;
-  width: 25vw;
+  width: 90%;
+  margin-right: 2vh;
   margin-bottom: 2vh;
-  background: rgb(150, 154, 154);
-  background: linear-gradient(90deg, rgb(150, 154, 154) 0%, rgb(56, 66, 65) 50%, rgb(23, 31, 30) 100%);
+  margin-left: 2vh;
+  border: 1px solid #000;
+  background: #d3d3dc;
+  color: #000000;
 }
 .container .activity div {
+  position: relative;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .container .activity h3 {
   color: #000;
   text-transform: uppercase;
+}
+.container .activity img {
+  height: 15vh;
+  margin-bottom: 1vh;
 }/*# sourceMappingURL=country.module.css.map */

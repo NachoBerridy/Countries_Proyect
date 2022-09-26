@@ -24,11 +24,12 @@ const FilterBar = () => {
   
   useEffect(() => {
     dispatch(getActivities())
-  }, [dispatch])
+  }, [dispatch, remove])
   
   const filterByActivity = (e) => {
     e.preventDefault()
     if (e.target.value === 'all' || e.target.value === 'Remove Filters') {
+      setRemove(true)
       dispatch(removeFilter())
     } else if (e.target.value !== 'all') {
       dispatch(filterCountriesByActivity(e.target.value))
@@ -39,13 +40,12 @@ const FilterBar = () => {
 
 
   const filterByContinent = (e) => {
-    e.preventDefault()
     if (e.target.value === 'all') {
-      dispatch(removeFilter())
       setRemove(true)
+      dispatch(removeFilter())
     } else if (e.target.value !== 'all') {
-      dispatch(filterCountriesByContinent(e.target.value))
       setRemove(false)
+      dispatch(filterCountriesByContinent(e.target.value))
     }
   }
 

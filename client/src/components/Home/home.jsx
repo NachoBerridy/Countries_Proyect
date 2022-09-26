@@ -3,11 +3,12 @@ import { useEffect, useState } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import Countries from "../countries/countries"
 import FilterBar from "../filterBar/filterBar.jsx"
-import { getCountries, sortCountries, searchCountry} from "../../redux/actions"
+import { getCountries, sortCountries} from "../../redux/actions"
 import Pagination from "../pagination/pagination.jsx"
 import style from './home.module.css'
 import { Link  } from "react-router-dom"
-import moto from './moto.svg'
+import About from "../about/about"
+import moto from '../../assets/moto.svg'
 
 
 const Home = () => {
@@ -74,7 +75,8 @@ const Home = () => {
           <Pagination className={style.pagination} countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
         </div>
       </div>
-      <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>                            
+      <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>   
+      <About />                           
     </div>
   )
 }
