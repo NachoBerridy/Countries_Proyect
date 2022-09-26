@@ -61,7 +61,7 @@ export function removeFilter(payload){
 }
 
 export function createActivity(activity){
-    
+  console.log(activity.image)
   let newActivity = {
     name: activity.name,
     difficulty: activity.difficulty,
