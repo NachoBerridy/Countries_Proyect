@@ -9,6 +9,7 @@ import style from './home.module.css'
 import { Link  } from "react-router-dom"
 import About from "../about/about"
 import moto from '../../assets/moto.svg'
+import ActivitiesList from "../activitiesList/activitiesList"
 
 
 const Home = () => {
@@ -76,7 +77,8 @@ const Home = () => {
         </div>
       </div>
       <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>   
-      <About />                           
+      <About />    
+      <ActivitiesList />                       
     </div>
   )
 }

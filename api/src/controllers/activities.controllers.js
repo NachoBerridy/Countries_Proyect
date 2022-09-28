@@ -28,9 +28,10 @@ const postActivity = async (req, res) => {
     }
 }
 
- const deleteActivity = async (req, res) => {
+const deleteActivity = async (req, res) => {
     try {
-        const { id } = req.body
+        const { id } = req.params
+        console.log("🚀 ~ file: activities.controllers.js ~ line 34 ~ deleteActivity ~ id", id)
         const activity = await Activity.findByPk(id)
         await activity.destroy()
         res.json(activity)

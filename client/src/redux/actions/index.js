@@ -4,7 +4,8 @@ import {GET_COUNTRIES,
         FILTER_COUNTRIES_BY_CONTINENT, 
         SORT_COUNTRIES, GET_ACTIVITIES, 
         REMOVE_FILTER,
-        SEARCH_COUNTRY} from './types.js'
+        SEARCH_COUNTRY,
+        DELETE_ACTIVITY} from './types.js'
 import axios from "axios"
 
 export function getCountries(){
@@ -77,6 +78,16 @@ export function createActivity(activity){
     return dispatch({
         type: POST_ACTIVITIES,
         payload: response.data
+    })
+  }
+}
+
+export function deleteActivity(id){
+  return async function (dispatch){
+    const response = await axios.delete(`http://localhost:3001/Activity/delete/${id}`)
+    return dispatch({
+      type: DELETE_ACTIVITY,
+      payload: response.data
     })
   }
 }

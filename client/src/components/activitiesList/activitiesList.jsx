@@ -1,8 +1,14 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { deleteActivity } from "../../redux/actions";
 
 const ActivitiesList = () => {
     const activities = useSelector((state) => state.activities)
+    const dispatch = useDispatch()
+    const handleClick = (e) => {
+        console.log(e.target.value)
+        dispatch(deleteActivity(e.target.value))
+    }
     return (
         <div>
             <h1>Activities</h1>
@@ -19,7 +25,7 @@ const ActivitiesList = () => {
                                     )
                                 }
                             </ul>
-                            <button>Delete</button>
+                            <input type="button" name="delte" id="1" value={a.id} onClick={handleClick} />
                         </div>
                     )
                 

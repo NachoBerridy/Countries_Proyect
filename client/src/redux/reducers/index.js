@@ -4,7 +4,8 @@ import {  GET_COUNTRIES,
           SORT_COUNTRIES, GET_ACTIVITIES, 
           FILTER_COUNTRIES_BY_CONTINENT, 
           REMOVE_FILTER,
-          SEARCH_COUNTRY} from '../actions/types.js';
+          SEARCH_COUNTRY,
+          DELETE_ACTIVITY} from '../actions/types.js';
           
 const initialState = {
     countries: [],
@@ -128,9 +129,14 @@ const rootReducer = (state = initialState, action) => {
         case POST_ACTIVITIES:
             return {
                 ...state,
+            }
+        case DELETE_ACTIVITY:
+            return {
+                ...state,
             }         
         default:
             break;
+
     }
     return state
 }
