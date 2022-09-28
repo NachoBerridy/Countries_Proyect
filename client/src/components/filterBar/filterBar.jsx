@@ -21,14 +21,19 @@ const FilterBar = () => {
   const activities = useSelector((state) => state.activities).map(a => a.name)
   const continents = useSelector(state => state.countries).map(c => c.continent).filter((v, i, a) => a.indexOf(v) === i)
   const [remove, setRemove] = React.useState(true)
+  const [selectContinent, setSelectContinent] = React.useState('')
+  const [selectActivity, setSelectActivity] = React.useState('')
   
   useEffect(() => {
     dispatch(getActivities())
-  }, [dispatch, remove])
+  }, [dispatch, remove, selectContinent])
   
   const filterByActivity = (e) => {
     e.preventDefault()
-    if (e.target.value === 'all' || e.target.value === 'Remove Filters') {
+    if(selectActivity === ''){
+      setSelectActivity(e.target)
+    }
+    if (e.target.value === 'all') {
       setRemove(true)
       dispatch(removeFilter())
     } else if (e.target.value !== 'all') {
@@ -36,16 +41,33 @@ const FilterBar = () => {
       setRemove(false)
     }
   }
+
+  const removeFilters = (e) => {
+    e.preventDefault()
+    dispatch(removeFilter())
+    setRemove(true)
+    selectActivity[0].selected = true
+    selectContinent[0].selected = true
+  }
   
 
 
   const filterByContinent = (e) => {
+    e.preventDefault(e.target.value)
+    if (selectContinent === ''){
+      setSelectContinent(e.target)
+    }
+    console.log(selectContinent)
     if (e.target.value === 'all') {
       setRemove(true)
-      dispatch(removeFilter())
+      dispatch(removeFilter('continent'))
     } else if (e.target.value !== 'all') {
       setRemove(false)
       dispatch(filterCountriesByContinent(e.target.value))
+      try
+      {
+        selectContinent.map(s => (s.value === e.target.value)? s.selected=true : s.selected=false)
+      }catch(err){}
     }
   }
 
@@ -76,7 +98,7 @@ const FilterBar = () => {
                 <option value={continent}>{continent}</option>
               )):null}
             </select>
-            <input type='button' value='Remove Filters' onClick={filterByActivity} className={style.remove} disabled={remove}/>
+            <input type='button' value='Remove Filters' onClick={removeFilters} className={style.remove} disabled={remove}/>
           </div>
         </div>
       </div>

@@ -111,11 +111,25 @@ const rootReducer = (state = initialState, action) => {
             }
         case REMOVE_FILTER:
             console.log('remove filter')
-            return {
-                ...state,
-                filteredCountries: state.countries,
-                activityFilter: state.countries,
-                continentFilter: state.countries,
+            if (action.payload === 'activity') {
+                return {
+                    ...state,
+                    activityFilter: state.countries,
+                    filteredCountries: state.continentFilter
+                }
+            }else if (action.payload === 'continent') {
+                return {
+                    ...state,
+                    continentFilter: state.countries,
+                    filteredCountries: state.activityFilter
+                }
+            }else{
+                return {
+                    ...state,
+                    filteredCountries: state.countries,
+                    activityFilter: state.countries,
+                    continentFilter: state.countries,
+                }
             }
         case SORT_COUNTRIES:
             console.log('Ordenando por', action.payload)

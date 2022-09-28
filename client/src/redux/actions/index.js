@@ -1,8 +1,10 @@
 import {GET_COUNTRIES, 
         POST_ACTIVITIES, 
         FILTER_COUNTRIES_BY_ACTIVITY, 
-        FILTER_COUNTRIES_BY_CONTINENT, 
-        SORT_COUNTRIES, GET_ACTIVITIES, 
+        FILTER_COUNTRIES_BY_CONTINENT,
+        FILTER_COUNTRIES_BY_AREA,
+        SORT_COUNTRIES, 
+        GET_ACTIVITIES, 
         REMOVE_FILTER,
         SEARCH_COUNTRY,
         DELETE_ACTIVITY} from './types.js'
@@ -53,6 +55,13 @@ export function filterCountriesByContinent(payload){
     payload
   }
 }
+export function filterCountriesByArea(payload){
+  return {
+    type: FILTER_COUNTRIES_BY_AREA,
+    payload
+  }
+}
+
 
 export function removeFilter(payload){
   return {
