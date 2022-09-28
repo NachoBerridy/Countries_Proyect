@@ -122,6 +122,11 @@
   margin-left: 1rem;
   margin-bottom: 0.5rem;
 }
+.container .card .actBtn:hover {
+  scale: 1.05;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
 .container .back {
   overflow-y: scroll;
   scroll-behavior: smooth;
