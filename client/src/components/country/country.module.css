@@ -25,19 +25,66 @@
   align-items: center;
   justify-content: center;
   height: 90vh;
-  width: 40vw;
-  background: rgb(28, 48, 46);
-  background: linear-gradient(0deg, rgb(28, 48, 46) 0%, rgb(9, 109, 121) 50%, rgb(112, 193, 184) 100%);
+  width: 35vw;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(37, 37, 37, 0.3);
+  background-size: cover;
+  background-position: center;
   color: white;
   border-radius: 4vh;
+  border: 2px solid;
+  outline: none;
+  border-color: #0186f3;
+  box-shadow: 0 0 3vw #0186f3;
   position: relative;
 }
+.container .card h1 {
+  text-transform: uppercase;
+  color: #989696;
+  font-weight: bold;
+  font-size: 3rem;
+}
 .container .card img {
-  height: 20vh;
-  border-radius: 5%;
+  width: 16vw;
   margin-bottom: 2vh;
 }
-.container .card button {
+.container .card .info {
+  width: 26vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container .card .info div {
+  width: 26vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  margin: -0.5rem;
+}
+.container .card .info div h4 {
+  font-size: 1.5rem;
+  font-weight: extra-bold;
+  color: black;
+  margin-left: 1rem;
+  margin-right: 0.5rem;
+}
+.container .card .info div p {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: white;
+}
+.container .card .info div img {
+  height: 2.2rem;
+  width: 2.2rem;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+.container .card .return {
   background: transparent;
   border: none;
   color: #000000;
@@ -45,12 +92,31 @@
   text-align: center;
   text-decoration: none;
   position: absolute;
-  bottom: 1vh;
+  top: 1vh;
+  left: -1vw;
+  font-size: 1.5rem;
+  border-radius: 2vh;
+}
+.container .card .return img {
+  width: 2rem;
+  height: 2rem;
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+.container .card .actBtn {
+  background-color: #0186f3;
+  border: none;
+  color: white;
+  padding: 1vh 1vw;
+  text-align: center;
+  text-decoration: none;
+  position: absolute;
+  top: 2vh;
   right: 1vw;
   font-size: 1.5rem;
   border-radius: 2vh;
 }
-.container .card button img {
+.container .card .actBtn img {
   width: 2rem;
   height: 2rem;
   margin-left: 1rem;
@@ -76,7 +142,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 2vh;
   border-radius: 4vh;
   width: 90%;
@@ -84,21 +150,28 @@
   margin-bottom: 2vh;
   margin-left: 2vh;
   border: 1px solid #000;
-  background: #d3d3dc;
+  background: #c0c0c0;
+  background-size: cover;
+  background-position: center;
   color: #000000;
 }
-.container .activity div {
-  position: relative;
+.container .activity .actInfo {
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  text-align: start;
+}
+.container .activity .actInfo p {
+  width: 100%;
 }
 .container .activity h3 {
   color: #000;
   text-transform: uppercase;
+  margin-left: 2vh;
 }
 .container .activity img {
-  height: 15vh;
+  width: 10vw;
   margin-bottom: 1vh;
+  border-radius: 2vh;
+  margin-right: 1vh;
 }/*# sourceMappingURL=country.module.css.map */

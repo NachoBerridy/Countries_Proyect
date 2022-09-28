@@ -22,17 +22,60 @@
         align-items: center
         justify-content: center
         height: 90vh
-        width: 40vw
-        background: rgb(28,48,46)
-        background: linear-gradient(0deg, rgba(28,48,46,1) 0%, rgba(9,109,121,1) 50%, rgba(112,193,184,1) 100%)
+        width: 35vw
+        //background-image: url('../../assets/travel1.jpg')
+        // background: rgba(37, 37, 37, 0.49)
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1)
+        backdrop-filter: blur(5px)
+        -webkit-backdrop-filter: blur(5px)
+        border: 1px solid rgba(37, 37, 37, 0.3)
+        background-size: cover
+        background-position: center
         color: white
         border-radius: 4vh
+        border: 2px solid 
+        outline: none
+        border-color: #0186f3
+        box-shadow: 0 0 3vw #0186f3
         position: relative
+        h1
+            text-transform: uppercase
+            color: #989696
+            font-weight: bold
+            font-size: 3rem
         img
-            height: 20vh
-            border-radius: 5%
+            width: 16vw
             margin-bottom: 2vh
-        button
+        .info
+            width: 26vw
+            display: flex
+            flex-direction: column
+            align-items: center
+            justify-content: center
+            div
+                width: 26vw
+                display: flex
+                flex-direction: row
+                justify-content: start
+                align-items: center
+                margin: -0.5rem
+                h4
+                    font-size: 1.5rem
+                    font-weight: extra-bold
+                    color: black
+                    margin-left: 1rem
+                    margin-right: 0.5rem
+                p
+                    font-size: 1.3rem
+                    font-weight: bold
+                    color: white
+                img
+                    height: 2.2rem
+                    width: 2.2rem
+                    margin-right: 1rem
+                    margin-left: 1rem
+                    margin-top: 0.5rem
+        .return
             background: transparent
             border: none
             color: #000000
@@ -40,7 +83,24 @@
             text-align: center
             text-decoration: none
             position: absolute
-            bottom: 1vh
+            top: 1vh
+            left: -1vw
+            font-size: 1.5rem
+            border-radius: 2vh
+            img
+                width: 2rem
+                height: 2rem
+                margin-left: 1rem
+                margin-bottom: 0.5rem
+        .actBtn
+            background-color: #0186f3
+            border: none
+            color: white
+            padding: 1vh 1vw
+            text-align: center
+            text-decoration: none
+            position: absolute
+            top: 2vh
             right: 1vw
             font-size: 1.5rem
             border-radius: 2vh
@@ -69,7 +129,7 @@
         display: flex
         flex-direction: row
         align-items: center
-        justify-content: space-evenly
+        justify-content: space-between
         gap: 2vh
         border-radius: 4vh
         width: 90%
@@ -77,21 +137,28 @@
         margin-bottom: 2vh
         margin-left: 2vh
         border: 1px solid #000
-        background: #d3d3dc
+        background: #c0c0c0
+        background-size: cover
+        background-position: center
         color: #000000
-        div
-            position: relative
+        .actInfo
+
             display: flex
             flex-direction: column
-            justify-content: center
             align-items: center
+            text-align: start
+            p
+                width: 100%
         h3
             // rotate: -90deg
             color: #000
             text-transform: uppercase
+            margin-left: 2vh
         img
-            height: 15vh
+            width: 10vw
             margin-bottom: 1vh
+            border-radius: 2vh
+            margin-right: 1vh
 
             
         
