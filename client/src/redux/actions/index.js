@@ -93,10 +93,18 @@ export function createActivity(activity){
 
 export function deleteActivity(id){
   return async function (dispatch){
-    const response = await axios.delete(`http://localhost:3001/Activity/delete/${id}`)
-    return dispatch({
+    axios.delete(`http://localhost:3001/Activity/delete/${id}`)
+    .then(response => {
+      dispatch({
+        type: DELETE_ACTIVITY,
+        payload: response.data
+
+      })
+    })
+    }
+    /* return dispatch({
       type: DELETE_ACTIVITY,
       payload: response.data
-    })
-  }
+    }) */
+    
 }

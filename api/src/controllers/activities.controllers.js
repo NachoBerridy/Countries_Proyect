@@ -28,7 +28,7 @@ const postActivity = async (req, res) => {
     }
 }
 
-const deleteActivity = async (req, res) => {
+/* const deleteActivity = async (req, res) => {
     try {
         const { id } = req.params
         const activity = await Activity.findByPk(id)
@@ -37,6 +37,15 @@ const deleteActivity = async (req, res) => {
     } catch (error) {
         res.status(500).json(error)
     }
+}  */
+
+const deleteActivity =  (req, res) => {
+    const { id } = req.params
+    Activity.findByPk(id)
+    .then (activity => {activity.destroy()})
+    .then (activity => res.json(activity))
+    .catch (error => res.status(500).json(error))
+
 } 
 
 

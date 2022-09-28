@@ -9,6 +9,7 @@ import style from './home.module.css'
 import { Link  } from "react-router-dom"
 import About from "../about/about"
 import moto from '../../assets/moto.svg'
+import ActivitiesList from "../activitiesList/activitiesList"
 
 
 const Home = () => {
@@ -56,27 +57,29 @@ const Home = () => {
 
   
   return (
-    <div className={style.container}>
-      <span className={style.title}>LET'S TRAVEL</span>
-      <Link to= '/createActivity' className={style.post}>
-        <img src={moto} alt="qwe" />
-        <h3>Create Activity</h3>
-      </Link>  
-      <div>
-        <FilterBar />
-        <div className={style.nav}>
-          <select name="" id="" onChange={ordenar}>
-            <option value="disorder">Sort By</option>
-            <option value="A-Z" >↑ A-Z</option>
-            <option value="Z-A" >↓ Z-A</option>
-            <option value="morePopulation" >↑ Population</option>
-            <option value="lessPopulation" >↓ Population</option>
-          </select>
-          <Pagination className={style.pagination} countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
+    <div>
+      <div className={style.container}>
+        <span className={style.title}>LET'S TRAVEL</span>
+        <Link to= '/createActivity' className={style.post}>
+          <img src={moto} alt="qwe" />
+          <h3>Create Activity</h3>
+        </Link>  
+        <div>
+          <FilterBar />
+          <div className={style.nav}>
+            <select name="" id="" onChange={ordenar}>
+              <option value="disorder">Sort By</option>
+              <option value="A-Z" >↑ A-Z</option>
+              <option value="Z-A" >↓ Z-A</option>
+              <option value="morePopulation" >↑ Population</option>
+              <option value="lessPopulation" >↓ Population</option>
+            </select>
+            <Pagination className={style.pagination} countriesPerPage={10} totalCountries={countries.length} page = {page} paginate = {paginate}/>
+          </div>
         </div>
+        <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>   
+        <About />               
       </div>
-      <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>   
-      <About />                          
     </div>
   )
 }
