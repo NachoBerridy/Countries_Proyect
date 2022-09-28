@@ -1,4 +1,4 @@
-const axios = require('axios')
+const axios = require('axios');
 const { conn } = require('../db.js')
 const { Country, Activity } = conn.models
 
@@ -28,13 +28,39 @@ const postActivity = async (req, res) => {
     }
 }
 
+ const deleteActivity = async (req, res) => {
+    try {
+        const { id } = req.body
+        const activity = await Activity.findByPk(id)
+        await activity.destroy()
+        res.json(activity)
+    } catch (error) {
+        res.status(500).json(error)
+    }
+} 
+
+
+
 const getActivities = async (req, res) => {
     try {
-        const activities = await Activity.findAll(
+        const resp = await Activity.findAll(
             {
-                attributes: ['name']
+                include: {
+                    model: Country,
+                }
             }
         )
+        const activities = resp.map(a => {
+            return {
+                id: a.Id,
+                name: a.name,
+                difficulty: a.difficulty,
+                duration: a.duration,
+                season: a.season,
+                image: a.image,
+                countries: a.countries
+            }
+        })
         res.json(activities)
     } catch (error) {
         res.status(500).json(error)
@@ -46,6 +72,7 @@ const getActivities = async (req, res) => {
 
 module.exports = {
     postActivity,
-    getActivities
+    getActivities,
+    deleteActivity
 }
 
