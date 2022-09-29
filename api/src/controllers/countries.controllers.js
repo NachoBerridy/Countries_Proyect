@@ -9,6 +9,10 @@ const getCountries = async () => {
       let {cca3, name, flags, continents, capital = ['No capital'], subregion, area, population } = c
       
       name = name.common.split(" ").join("_");
+      try{
+        name = name.replace('(','')
+        name = name.replace(')','')
+      }catch{}
       for (let i = 1; i < name.length; i++) {
         if (name[i] === "_") {
           name = name.slice(0, i + 1) + name[i + 1].toUpperCase() + name.slice(i + 2)
@@ -65,7 +69,6 @@ const getCountries = async () => {
 
 const getCountriesByName = async (req, res) => {
   let { name } = req.params
-  console.log("🚀 ~ file: countries.controllers.js ~ line 64 ~ getCountriesByName ~ name", name)
   name = name.split(" ").join("_");
   name = name.toLowerCase()
   name = name.charAt(0).toUpperCase() + name.slice(1)
@@ -74,8 +77,6 @@ const getCountriesByName = async (req, res) => {
       name = name.slice(0, i + 1) + name[i + 1].toUpperCase() + name.slice(i + 2)
     }  
   }
-  console.log("🚀 ~ file: countries.controllers.js ~ line 67 ~ getCountriesByName ~ name", name)
-
   try {
     
     let country = await Country.findAll(
@@ -130,6 +131,7 @@ const getCountriesByCode = async (code) => {
     return error
   }
 }
+
 
 
 

@@ -74,7 +74,33 @@ const getActivities = async (req, res) => {
     } catch (error) {
         res.status(500).json(error)
     }
-}
+} 
+/* 
+const getActivities = (req, res) => {
+    Activity.findAll(
+        {
+            include: {
+                model: Country,
+            }
+        }
+    )
+    .then (
+        resp => {
+            const activities = resp.map(a => {
+                return {
+                    id: a.Id,
+                    name: a.name,
+                    difficulty: a.difficulty,
+                    duration: a.duration,
+                    season: a.season,
+                    image: a.image,
+                    countries: a.countries
+                }
+            })
+            res.json(activities)
+        }
+    ).catch (error => res.status(500).json(error))
+} */
 
 
 

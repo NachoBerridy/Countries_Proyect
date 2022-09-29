@@ -62,7 +62,7 @@ const Country = () => {
                   <p>{country.continent}</p>
                 </div>
 
-                {(country.subregion !== country.continent)?
+                {((country.subregion !== country.continent) && country.subregion)?
                   <div>
                     <h4>Subregion: </h4>
                     <p>{country.subregion}</p>
