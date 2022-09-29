@@ -78,7 +78,7 @@ const Home = () => {
           </div>
         </div>
         <Countries countries={countries} firstCountry={firstCountry} lastCountry={lastCountry}/>   
-        <About />               
+        <About />           
       </div>
     </div>
   )

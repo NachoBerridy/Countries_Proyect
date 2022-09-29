@@ -46,8 +46,12 @@ const FilterBar = () => {
     e.preventDefault()
     dispatch(removeFilter())
     setRemove(true)
-    selectActivity[0].selected = true
-    selectContinent[0].selected = true
+    try {
+      selectActivity[0].selected = true
+    } catch { }
+    try{
+      selectContinent[0].selected = true
+    }catch{}
   }
   
 
