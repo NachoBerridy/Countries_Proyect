@@ -35,6 +35,7 @@ const getCountries = async () => {
       {
         include: {
           model: Activity,
+          attributes: ['name', 'difficulty', 'duration', 'season', 'like','image']
         },
         attributes: ['id', 'name', 'flag', 'continent', 'population', 'capital', 'subregion', 'area']
       }
@@ -84,7 +85,7 @@ const getCountriesByName = async (req, res) => {
       {
         include: {
           model: Activity,
-          attributes: ['name', 'difficulty', 'duration', 'season', 'image']
+          attributes: ['name', 'difficulty', 'duration', 'season', 'like','image']
         },
         where: {
           name: name

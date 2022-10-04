@@ -77,6 +77,7 @@ export function createActivity(activity){
     difficulty: activity.difficulty,
     duration: activity.duration,
     season: activity.season,
+    like: activity.like,
     countryId: activity.countries,
     image: activity.image
   } 

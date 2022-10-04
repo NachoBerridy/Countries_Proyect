@@ -25,6 +25,10 @@ const activity = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    like:{
+      type: DataTypes.INTEGER,
+      allowNull:true,
+    },
     image:{
       type: DataTypes.STRING,
       allowNull: false,

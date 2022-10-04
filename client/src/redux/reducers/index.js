@@ -79,12 +79,19 @@ const sort = (list, by) => {
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
         case GET_COUNTRIES:
-            return {
-                ...state,
-                countries: action.payload,
-                filteredCountries: action.payload,
-                activityFilter: action.payload,
-                continentFilter: action.payload,
+            if (state.filteredCountries.length > 0){
+                return {
+                    ...state,
+                }
+            }else{
+                return {
+                    ...state,
+                    countries: action.payload,
+                    filteredCountries: action.payload,
+                    activityFilter: action.payload,
+                    continentFilter: action.payload,
+                    loading: false,
+                }
             }
         case GET_ACTIVITIES:
             return {

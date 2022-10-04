@@ -18,6 +18,7 @@ export default function CreateActivity() {
     difficulty: "",
     duration: "",
     season: "",
+    like:"",
     countries: "",
     image: ""
   }) 
@@ -29,13 +30,16 @@ export default function CreateActivity() {
     difficulty: 0,
     duration: 0,
     season: "",
+    like: 0,
     image: "",
     countries: [],
   })
   
   const [seasonOptions, setSeasonOptions] = React.useState(['summer', 'winter', 'autumn', 'spring']) 
+  // const [disabled, setDisabled] = React.useState(true)
   
   let handleChange = (e) => {
+    
     e.preventDefault()
     setInput((prev) => ({
       ...prev,
@@ -77,10 +81,11 @@ export default function CreateActivity() {
       difficulty: 0,
       duration: 0,
       season: "",
+      like:0,
       image: "",
       countries: [],
     })
-    }
+  }
 
 
   
@@ -98,7 +103,7 @@ export default function CreateActivity() {
     if (!input.countries) {
       err.countries = "You must select at least one country"
     }
-    if ( err=== {} ) {
+    if ( err.countries || err.name || err.difficulty || err.duration) {
       setSubmit(true)
     }else {
       setSubmit(false)
@@ -136,6 +141,12 @@ export default function CreateActivity() {
               onChange={(e) => handleChange(e)}
             />
             {errors.difficulty? <p>{errors.difficulty}</p> : null}
+            <input type="number" 
+                   placeholder="Like" 
+                   name='like'
+                   value={input.like}
+                   onChange={(e) => handleChange(e)} 
+            />
             <input
               placeholder="Duration"
               type="number"
@@ -174,7 +185,7 @@ export default function CreateActivity() {
               value={input.image}
               onChange={(e) => handleChange(e)}
               />
-            <input type="submit" disabled = {submit} value= 'Create Activity'/>
+            <input type="submit" disabled = {submit}  value= 'Create Activity'/>
           </div>
         </form>
         

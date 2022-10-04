@@ -81,6 +81,7 @@ const Country = () => {
                     <p>Difficulty level: {activity.difficulty}</p>
                     <p>Duration: {activity.duration} weeks</p>
                     <p>Season: {activity.season}</p>
+                    <p>like: {activity.like}</p>
                   </div>
                 {Boolean(activity.image)? 
                   <img src={activity.image} alt="Activity" width="200" />

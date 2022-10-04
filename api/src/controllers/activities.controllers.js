@@ -4,11 +4,13 @@ const { Country, Activity } = conn.models
 
 const postActivity = async (req, res) => {
     try {
-        const { name, difficulty, duration, season, image, countryId } = req.body;
+        const { name, difficulty, duration, season, image, like, countryId } = req.body;
+        console.log(req.body)
         const newActivity = await Activity.create({
         name,
         difficulty,
         duration,
+        like,
         season,
         image,
         })
