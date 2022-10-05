@@ -1,29 +1,32 @@
-const axios = require('axios');
 const { conn } = require('../db.js')
 const { Country, Activity } = conn.models
 
 const postActivity = async (req, res) => {
     try {
-        const { name, difficulty, duration, season, image, like, countryId } = req.body;
-        console.log(req.body)
+        //Desestruro el body de la request
+        const { name, difficulty, duration, season, image, countryId } = req.body;
+
+        //Creo la actividad
         const newActivity = await Activity.create({
-        name,
-        difficulty,
-        duration,
-        like,
-        season,
-        image,
+            name,
+            difficulty,
+            duration,
+            season,
+            image,
         })
-        //cargar la actividad en el pais
-        console.log(countryId)
+
+        //Busco los paises que deben enlaazarse con la actividad
         const countries = await countryId.map(c => {
             return Country.findByPk(c)
         })
+
+        //Enlazo los paises con la actividad
         await Promise.all(countries).then(c => {
             c.forEach(country => {
                 country.addActivity(newActivity)
             })
         })
+
         res.json(newActivity)
     } catch (error) {
         res.status(500).json(error)
@@ -42,6 +45,7 @@ const postActivity = async (req, res) => {
 }  */
 
 const deleteActivity =  (req, res) => {
+    //
     const { id } = req.params
     Activity.findByPk(id)
     .then (activity => {activity.destroy()})
@@ -76,9 +80,10 @@ const getActivities = async (req, res) => {
     } catch (error) {
         res.status(500).json(error)
     }
-} 
-/* 
-const getActivities = (req, res) => {
+}
+
+
+/*const getActivities = (req, res) => {
     Activity.findAll(
         {
             include: {
@@ -102,10 +107,7 @@ const getActivities = (req, res) => {
             res.json(activities)
         }
     ).catch (error => res.status(500).json(error))
-} */
-
-
-
+}*/
 
 module.exports = {
     postActivity,

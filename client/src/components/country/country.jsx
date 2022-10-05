@@ -1,10 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 import axios from "axios";
 import style from "./country.module.css";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
 import home from "../../assets/homeButton.svg";
 import back from "../../assets/back.svg";
 import capital from "../../assets/capital.svg";
@@ -13,12 +12,18 @@ import area from "../../assets/area.png";
 import continent from "../../assets/continent.svg";
 
 const Country = () => {
-  const [country, setCountry] = useState([]);
+
+  //Obtengo el nombre del país
   const { countryName } = useParams();
+  
+  const ddefaultImage = useSelector(state => state.defaultImage)
+  //Estados locales
+  const [country, setCountry] = useState([]);
   const [flip, setFlip] = useState(true);
 
 
-  
+  //Función que obtiene los datos cuando se renderiza el componente
+
   useEffect(() => {  
     const fetchCountry = async () => { 
       const { data } = await axios.get(`http://localhost:3001/countries/${countryName}`)
@@ -27,8 +32,6 @@ const Country = () => {
     fetchCountry();
   }, [countryName]);
 
-  console.log("🚀 ~ file: country.jsx ~ line 7 ~ Country ~ country", country)
-  console.log(country.activities)
 
   return (
     <div className={style.container}>
@@ -81,7 +84,6 @@ const Country = () => {
                     <p>Difficulty level: {activity.difficulty}</p>
                     <p>Duration: {activity.duration} weeks</p>
                     <p>Season: {activity.season}</p>
-                    <p>like: {activity.like}</p>
                   </div>
                 {Boolean(activity.image)? 
                   <img src={activity.image} alt="Activity" width="200" />

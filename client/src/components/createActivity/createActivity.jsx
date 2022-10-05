@@ -3,40 +3,39 @@ import { useDispatch, useSelector } from "react-redux"
 import { createActivity } from "../../redux/actions"
 import Select from 'react-select'
 import style from './createActivity.module.css'
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import home from '../../assets/homeButton.svg'
+import validate from './functions.js'
 
 export default function CreateActivity() {
   
+  const dispatch = useDispatch()
+  const defaultImage = useSelector(state => state.defaultActivityImage)
+  const countriesList = useSelector(state => state.countries)
 
-  let dispatch = useDispatch()
-  let countriesList = useSelector(state => state.countries)
-  let [submit, setSubmit] = React.useState(true)
-  let [errors, setErrors] = React.useState({
-    name: "",
-    difficulty: "",
-    duration: "",
-    season: "",
-    like:"",
-    countries: "",
-    image: ""
-  }) 
-
-  const [defaultImage, setDefaultImage] = React.useState("https://images.unsplash.com/photo-1523867904486-8153c8afb94f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2NDA3MzkxNQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080")
-
-  let [input, setInput] = React.useState({
+  //Estados locales
+  // const [defaultImage, setDefaultImage] = useState("https://images.unsplash.com/photo-1523867904486-8153c8afb94f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2NDA3MzkxNQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080")
+  const [seasonOptions, setSeasonOptions] = useState(['summer', 'winter', 'autumn', 'spring']) 
+  const [submit, setSubmit] = useState(true)
+  let [input, setInput] = useState({
     name: "",
     difficulty: 0,
     duration: 0,
     season: "",
-    like: 0,
     image: "",
     countries: [],
   })
+  const [errors, setErrors] = useState({
+    name: "Name must have at least 3 characters",
+    difficulty: "Difficulty must be between 1 and 5",
+    duration: "Duration must be between 1 and 24",
+    season: "",
+    countries: "You must select at least one country",
+    image: ""
+  }) 
   
-  const [seasonOptions, setSeasonOptions] = React.useState(['summer', 'winter', 'autumn', 'spring']) 
-  // const [disabled, setDisabled] = React.useState(true)
+  //Funciones que controlan los cambios en el formulario
   
   let handleChange = (e) => {
     
@@ -51,7 +50,7 @@ export default function CreateActivity() {
     }))
   }
 
-  let handleSelect = (e) => {
+  let handleSelectCountries = (e) => {
     setInput((prev) => ({
       ...prev,
       countries: e.map((country) => country.value)
@@ -73,7 +72,6 @@ export default function CreateActivity() {
         image: defaultImage
       }))
     }
-    console.log("🚀 ~ file: createActivity.jsx ~ line 16 ~ CreateActivity ~ input", JSON.stringify(input))
     dispatch(createActivity(input))
     alert("Activity created successfully!")
     setInput({
@@ -81,37 +79,20 @@ export default function CreateActivity() {
       difficulty: 0,
       duration: 0,
       season: "",
-      like:0,
       image: "",
       countries: [],
     })
   }
 
 
-  
-  const validate = (input) => {
-    let err = {}
-    if (!input.name || input.name.length < 3) {
-      err.name = "Name must have at least 3 characters"
-    }
-    if (!input.difficulty || input.difficulty < 1 || input.difficulty > 5) {
-      err.difficulty = "Difficulty must be between 1 and 5"
-    }
-    if (!input.duration || input.duration < 1 || input.duration > 24) {
-      err.duration = "Duration must be between 1 and 24"
-    }
-    if (!input.countries) {
-      err.countries = "You must select at least one country"
-    }
-    if ( err.countries || err.name || err.difficulty || err.duration) {
-      setSubmit(true)
-    }else {
-      setSubmit(false)
-    }
-    return err
-  }
+  //UseEffect que controla el estado del botón submit y cuando se renderiza el componente
 
   useEffect(() => {
+    if (errors.name || errors.difficulty || errors.duration || errors.countries) {
+      setSubmit(true)
+    } else {
+      setSubmit(false)
+    }
   }, [errors,input])
 
   return (
@@ -141,12 +122,6 @@ export default function CreateActivity() {
               onChange={(e) => handleChange(e)}
             />
             {errors.difficulty? <p>{errors.difficulty}</p> : null}
-            <input type="number" 
-                   placeholder="Like" 
-                   name='like'
-                   value={input.like}
-                   onChange={(e) => handleChange(e)} 
-            />
             <input
               placeholder="Duration"
               type="number"
@@ -172,7 +147,7 @@ export default function CreateActivity() {
                   return {value: country.id, label: country.name}
                 }
                 )}
-                onChange={(e) => handleSelect(e)}
+                onChange={(e) => handleSelectCountries(e)}
             />
             {errors.countries? <p>{errors.countries}</p> : null}
           </div>

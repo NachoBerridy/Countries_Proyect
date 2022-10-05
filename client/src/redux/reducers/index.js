@@ -14,6 +14,7 @@ const initialState = {
     loading: true,
     activityFilter: [],
     continentFilter: [],
+    defaultActivityImage: 'https://images.unsplash.com/photo-1523867904486-8153c8afb94f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2NDA3MzkxNQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080'
 }
 
 const sort = (list, by) => {
