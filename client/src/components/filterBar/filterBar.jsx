@@ -1,9 +1,5 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import {getActivities, 
-        filterCountriesByActivity, 
-        filterCountriesByContinent, 
-        removeFilter} from "../../redux/actions"
 import africa from '../../assets/africa.svg'
 import north_america from '../../assets/north_america.svg'
 import south_america from '../../assets/south_america.svg'
@@ -11,18 +7,25 @@ import asia from '../../assets/asia.svg'
 import europe from '../../assets/europe.svg'
 import oceania from '../../assets/australia.svg'
 import antartica from '../../assets/Antarctica.svg'
-
-
 import SearchBar from "../searchBar/searchBar"
 import style from './filterBar.module.css'
+import {getActivities, 
+        filterCountriesByActivity, 
+        filterCountriesByContinent, 
+        removeFilter} from "../../redux/actions"
 
 const FilterBar = () => {
   const dispatch = useDispatch()
+
+  //Estados globales
+  const filter = useSelector(state => state.filter)
   const activities = useSelector((state) => state.activities).map(a => a.name)
   const continents = useSelector(state => state.countries).map(c => c.continent).filter((v, i, a) => a.indexOf(v) === i)
-  const [remove, setRemove] = React.useState(true)
-  const [selectContinent, setSelectContinent] = React.useState('')
-  const [selectActivity, setSelectActivity] = React.useState('')
+
+  //Estados locales
+  const [remove, setRemove] = useState(true)
+  const [selectContinent, setSelectContinent] = useState('')
+  const [selectActivity, setSelectActivity] = useState('')
   
   useEffect(() => {
     dispatch(getActivities())
@@ -102,7 +105,7 @@ const FilterBar = () => {
                 <option value={continent}>{continent}</option>
               )):null}
             </select>
-            <input type='button' value='Remove Filters' onClick={removeFilters} className={style.remove} disabled={remove}/>
+            <input type='button' value='Remove Filters' onClick={removeFilters} className={style.remove} disabled={filter}/>
           </div>
         </div>
       </div>

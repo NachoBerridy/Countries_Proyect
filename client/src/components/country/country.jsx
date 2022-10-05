@@ -16,7 +16,8 @@ const Country = () => {
   //Obtengo el nombre del país
   const { countryName } = useParams();
   
-  const ddefaultImage = useSelector(state => state.defaultImage)
+  const defaultImage = useSelector(state => state.defaultActivityImage)
+  
   //Estados locales
   const [country, setCountry] = useState([]);
   const [flip, setFlip] = useState(true);
@@ -64,7 +65,6 @@ const Country = () => {
                   <h4>Continent: </h4>
                   <p>{country.continent}</p>
                 </div>
-
                 {((country.subregion !== country.continent) && country.subregion)?
                   <div>
                     <h4>Subregion: </h4>
@@ -87,13 +87,13 @@ const Country = () => {
                   </div>
                 {Boolean(activity.image)? 
                   <img src={activity.image} alt="Activity" width="200" />
-                  :<img src="https://images.unsplash.com/photo-1523867904486-8153c8afb94f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2NDA3MzkxNQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="imagen" />
+                  :<img src={defaultImage} alt="imagen" />
                 }
               </div>
             )): null}
-          <button onClick={()=>setFlip(!flip)} className={style.return}>
-            <img src={back} alt="back" />
-          </button>
+            <button onClick={()=>setFlip(!flip)} className={style.return}>
+              <img src={back} alt="back" />
+            </button>
           </div>
         }
       </div>

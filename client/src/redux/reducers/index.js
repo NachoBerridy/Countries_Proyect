@@ -1,19 +1,21 @@
-import {  GET_COUNTRIES, 
-          POST_ACTIVITIES, 
-          FILTER_COUNTRIES_BY_ACTIVITY, 
-          SORT_COUNTRIES, GET_ACTIVITIES, 
-          FILTER_COUNTRIES_BY_CONTINENT, 
-          REMOVE_FILTER,
-          SEARCH_COUNTRY,
-          DELETE_ACTIVITY} from '../actions/types.js';
-          
+import {    GET_COUNTRIES, 
+            POST_ACTIVITIES, 
+            FILTER_COUNTRIES_BY_ACTIVITY, 
+            SORT_COUNTRIES, GET_ACTIVITIES, 
+            FILTER_COUNTRIES_BY_CONTINENT, 
+            REMOVE_FILTER,
+            SEARCH_COUNTRY,
+            DELETE_ACTIVITY} from '../actions/types.js';
+
+
 const initialState = {
-    countries: [],
-    filteredCountries: [],
-    activities: [],
-    loading: true,
-    activityFilter: [],
-    continentFilter: [],
+    countries: [], //todos los paises, no se modifica, solo se ordena
+    filteredCountries: [], //paises filtrados por actividad y continente
+    activities: [], //nombre de todas las actividades
+    loading: true, //carga inicial
+    filter: true, //para saber si se esta filtrando o no
+    activityFilter: [], //paises filtrados por actividad
+    continentFilter: [], //paises filtrados por continente
     defaultActivityImage: 'https://images.unsplash.com/photo-1523867904486-8153c8afb94f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY2NDA3MzkxNQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080'
 }
 
@@ -108,14 +110,16 @@ const rootReducer = (state = initialState, action) => {
             return {
                 ...state,
                 activityFilter: state.countries.filter(c => c.activities.map(a => a.name).includes(action.payload)),
-                filteredCountries: state.continentFilter.filter(c => c.activities.map(a => a.name).includes(action.payload))
+                filteredCountries: state.continentFilter.filter(c => c.activities.map(a => a.name).includes(action.payload)),
+                filter: false
             }
         case FILTER_COUNTRIES_BY_CONTINENT:
             return {
                 ...state,
                 loading: false,
                 continentFilter: state.countries.filter(c => c.continent === action.payload),
-                filteredCountries: state.activityFilter.filter(c => c.continent === action.payload)
+                filteredCountries: state.activityFilter.filter(c => c.continent === action.payload),
+                filter: false
             }
         case REMOVE_FILTER:
             console.log('remove filter')
@@ -123,13 +127,15 @@ const rootReducer = (state = initialState, action) => {
                 return {
                     ...state,
                     activityFilter: state.countries,
-                    filteredCountries: state.continentFilter
+                    filteredCountries: state.continentFilter,
+                    filter: true
                 }
             }else if (action.payload === 'continent') {
                 return {
                     ...state,
                     continentFilter: state.countries,
-                    filteredCountries: state.activityFilter
+                    filteredCountries: state.activityFilter,
+                    filter: true
                 }
             }else{
                 return {
@@ -137,6 +143,7 @@ const rootReducer = (state = initialState, action) => {
                     filteredCountries: state.countries,
                     activityFilter: state.countries,
                     continentFilter: state.countries,
+                    filter: true
                 }
             }
         case SORT_COUNTRIES:

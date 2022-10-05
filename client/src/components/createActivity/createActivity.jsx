@@ -66,12 +66,6 @@ export default function CreateActivity() {
 
   let handleSubmit = (e) => {
     e.preventDefault()
-    if (input.image === "") {
-      setInput((prev) => ({
-        ...prev,
-        image: defaultImage
-      }))
-    }
     dispatch(createActivity(input))
     alert("Activity created successfully!")
     setInput({
@@ -92,8 +86,14 @@ export default function CreateActivity() {
       setSubmit(true)
     } else {
       setSubmit(false)
+      if (input.image === "") {
+        setInput((prev) => ({
+            ...prev,
+            image: defaultImage
+        }))
+      }
     }
-  }, [errors,input])
+  }, [errors,input, defaultImage])
 
   return (
     <div className={style.container}>
