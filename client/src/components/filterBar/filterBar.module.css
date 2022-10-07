@@ -31,6 +31,15 @@
   scale: 1.1;
   transition: all 0.5s ease;
 }
+.bar .filters .continents img {
+  height: 4.5rem;
+  stroke: #ac6a6a;
+  stroke-width: 11;
+}
+.bar .filters .continents img:hover {
+  scale: 1.1;
+  transition: all 0.5s ease;
+}
 .bar .filters select {
   background-color: #70C1B8;
   color: white;

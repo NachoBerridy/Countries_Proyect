@@ -22,7 +22,6 @@ const Country = () => {
   const [country, setCountry] = useState([]);
   const [flip, setFlip] = useState(true);
 
-
   //Función que obtiene los datos cuando se renderiza el componente
 
   useEffect(() => {  

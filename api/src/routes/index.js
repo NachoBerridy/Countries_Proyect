@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const { getCountries, getCountriesByName, getCountriesByCode } = require('../controllers/countries.controllers.js')
-const { postActivity, getActivities, deleteActivity } = require('../controllers/activities.controllers.js')
+const { postActivity, getActivities, deleteActivity, updateActivity } = require('../controllers/activities.controllers.js')
 
 const router = Router()
 
@@ -22,6 +22,7 @@ router.get('/countries/:name', getCountriesByName)
 router.post('/Activity', postActivity)
 router.get('/Activities', getActivities)
 router.delete('/Activity/delete/:id', deleteActivity)
+router.put('/Activity/:name', updateActivity)
 router.get('*', (req, res) =>{
     res.status(404).json({error: 'Page not found'})
 })

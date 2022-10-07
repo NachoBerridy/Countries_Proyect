@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useState, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import africa from '../../assets/africa.svg'
 import north_america from '../../assets/north_america.svg'
@@ -19,62 +19,47 @@ const FilterBar = () => {
 
   //Estados globales
   const filter = useSelector(state => state.filter)
+  const currentContinent = useSelector(state => state.currentContinent)
+  const currentActivity = useSelector(state => state.currentActivity)
   const activities = useSelector((state) => state.activities).map(a => a.name)
   const continents = useSelector(state => state.countries).map(c => c.continent).filter((v, i, a) => a.indexOf(v) === i)
 
-  //Estados locales
-  const [remove, setRemove] = useState(true)
-  const [selectContinent, setSelectContinent] = useState('')
-  const [selectActivity, setSelectActivity] = useState('')
+
+  //Referencias
+  const selectContinentRef = useRef()
+  const selectActivityRef = useRef()
   
+  //UseEffect
+
   useEffect(() => {
     dispatch(getActivities())
-  }, [dispatch, remove, selectContinent])
-  
+    currentActivity?((selectActivityRef.current.value = currentActivity)): selectActivityRef.current.value = "all"
+    currentContinent?(selectContinentRef.current.value = currentContinent): selectActivityRef.current.value = "all"
+  }, [dispatch, currentActivity, currentContinent])
+
+  //Funciones de filtrado
+
   const filterByActivity = (e) => {
     e.preventDefault()
-    if(selectActivity === ''){
-      setSelectActivity(e.target)
-    }
     if (e.target.value === 'all') {
-      setRemove(true)
       dispatch(removeFilter())
-    } else if (e.target.value !== 'all') {
+    }else if (e.target.value !== 'all') {
       dispatch(filterCountriesByActivity(e.target.value))
-      setRemove(false)
     }
   }
 
   const removeFilters = (e) => {
     e.preventDefault()
     dispatch(removeFilter())
-    setRemove(true)
-    try {
-      selectActivity[0].selected = true
-    } catch { }
-    try{
-      selectContinent[0].selected = true
-    }catch{}
   }
   
 
-
   const filterByContinent = (e) => {
     e.preventDefault(e.target.value)
-    if (selectContinent === ''){
-      setSelectContinent(e.target)
-    }
-    console.log(selectContinent)
     if (e.target.value === 'all') {
-      setRemove(true)
       dispatch(removeFilter('continent'))
     } else if (e.target.value !== 'all') {
-      setRemove(false)
       dispatch(filterCountriesByContinent(e.target.value))
-      try
-      {
-        selectContinent.map(s => (s.value === e.target.value)? s.selected=true : s.selected=false)
-      }catch(err){}
     }
   }
 
@@ -93,13 +78,13 @@ const FilterBar = () => {
             <input type="image" src={antartica} value = 'Antarctica' alt="antartica" onClick={filterByContinent}/>
           </div>
           <div>
-            <select name="" id="" onChange={filterByActivity}>
+            <select name="" id="" onChange={filterByActivity} ref={selectActivityRef}>
               <option value="all">Filter By Activity</option>
                 {activities.length?activities.map((activity) => (
                   <option value={activity}>{activity}</option>
                 )):null}
             </select>
-            <select name="" id="" onChange={filterByContinent}>
+            <select name="" id="" onChange={filterByContinent} ref={selectContinentRef}>
               <option value="all">Filter By Continent</option>
               {continents.length?continents.map((continent) => (
                 <option value={continent}>{continent}</option>
@@ -113,3 +98,5 @@ const FilterBar = () => {
 }
 
 export default FilterBar
+
+

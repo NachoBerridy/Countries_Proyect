@@ -7,7 +7,9 @@ import {GET_COUNTRIES,
         GET_ACTIVITIES, 
         REMOVE_FILTER,
         SEARCH_COUNTRY,
-        DELETE_ACTIVITY} from './types.js'
+        DELETE_ACTIVITY,
+        UPDATE_ACTIVITY,
+        ERROR} from './types.js'
 import axios from "axios"
 
 export function getCountries(){
@@ -81,14 +83,47 @@ export function createActivity(activity){
     countryId: activity.countries,
     image: activity.image
   } 
-
   return async function (dispatch){
       
     const response = await axios.post('http://localhost:3001/Activity', newActivity)
-    return dispatch({
+    try{
+    dispatch({
         type: POST_ACTIVITIES,
         payload: response.data
     })
+    }catch(error){
+      dispatch({
+        type: ERROR,
+        payload: error
+      })
+    }
+  }
+}
+
+export function updateActivity(activity){
+  let Activity = {
+    name: activity.name,
+    difficulty: activity.difficulty,
+    duration: activity.duration,
+    season: activity.season,
+    like: activity.like,
+    countryId: activity.countries,
+    image: activity.image
+  } 
+  return async function (dispatch){
+    const response = await axios.put(`http://localhost:3001/Activity/${activity.name}`, Activity)
+    
+    try{
+    dispatch({
+        type: UPDATE_ACTIVITY,
+        payload: response.data
+    })
+    }catch(error){
+      dispatch({
+        type: ERROR,
+        payload: error
+      })
+    } 
   }
 }
 

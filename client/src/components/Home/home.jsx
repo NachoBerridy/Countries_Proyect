@@ -21,12 +21,17 @@ const Home = () => {
   const [order, setOrder] = useState('disorder')
 
   useEffect(() => {
-      /* if(countries.length){
-        
-      } */
       dispatch(getCountries())
     }, [dispatch])
 
+    useEffect(() => {
+      setFirstCountry(0)
+      setLastCountry(10)
+      setPage(1)
+    }, [countries, countries.length])
+  
+    useEffect(() => {
+    }, [firstCountry, lastCountry, page])
   
   const ordenar = (e) => {
     
@@ -49,16 +54,8 @@ const Home = () => {
   }
   
 
-  useEffect(() => {
-    setFirstCountry(0)
-    setLastCountry(10)
-    setPage(1)
-  }, [countries, countries.length])
-
-  useEffect(() => {
-  }, [firstCountry, lastCountry, page])
-
   
+
   return (
     <div>
       <div className={style.container}>

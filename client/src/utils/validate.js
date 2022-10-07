@@ -9,8 +9,11 @@ const validate = (input) => {
     if (!input.duration || input.duration < 1 || input.duration > 24) {
       err.duration = "Duration must be between 1 and 24"
     }
-    if (!input.countries) {
+    if (input.countries.length === 0) {
       err.countries = "You must select at least one country"
+    }
+    if (input.season.length === 0) {
+      err.season = "You must select at least one season"
     }
     return err
 }

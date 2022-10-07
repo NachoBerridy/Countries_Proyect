@@ -8,9 +8,11 @@ import styles from './countries.module.css'
 
 const Countries = ({countries, firstCountry, lastCountry}) => {
 
+
   const loading = useSelector((state) => state.loading)
   useEffect(() => {
   }, [countries, countries.length, firstCountry, lastCountry, loading]);
+
   
   return (
     
