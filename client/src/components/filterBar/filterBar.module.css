@@ -52,8 +52,19 @@
   cursor: pointer;
 }
 .bar .filters select:hover {
+  background-color: rgba(0, 0, 0, 0.8);
   transparence: 0.5;
   transition: all 0.5s ease;
+}
+.bar .filters .groupFilter {
+  display: flex;
+  flex-direction: column;
+}
+.bar .filters .groupFilter button {
+  background-color: #F6AD55;
+  color: #2D3748;
+  border: none;
+  border-radius: 0.15rem;
 }
 .bar .filters .remove {
   background-color: #c17070;

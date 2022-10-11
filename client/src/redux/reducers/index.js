@@ -140,22 +140,42 @@ const rootReducer = (state = initialState, action) => {
         case REMOVE_FILTER:
             console.log('remove filter')
             if (action.payload === 'activity') {
-                return {
-                    ...state,
-                    activityFilter: state.countries,
-                    filteredCountries: state.continentFilter,
-                    currentActivity: '',
-                    filter: true,
-                    error: false
+                if (state.currentContinent === '') {
+                    return {
+                        ...state,
+                        filteredCountries: state.continentFilter,
+                        currentActivity: '',
+                        filter: true,
+                        error: false
+                    }
+                } else {
+                    return {
+                        ...state,
+                        filteredCountries: state.continentFilter.filter(c => c.continent === state.currentContinent),
+                        currentActivity: '',
+                        filter: false,
+                        error: false
+                    }
                 }
             }else if (action.payload === 'continent') {
-                return {
-                    ...state,
-                    continentFilter: state.countries,
-                    filteredCountries: state.activityFilter,
-                    currentContinent: '',
-                    filter: true,
-                    error: false
+                if (state.currentActivity === '') {
+                    return {
+                        ...state,
+                        continentFilter: state.countries,
+                        filteredCountries: state.activityFilter,
+                        currentContinent: '',
+                        filter: true,
+                        error: false
+                    }
+                }else{
+                    return {
+                        ...state,
+                        continentFilter: state.countries,
+                        filteredCountries: state.activityFilter.filter(c => c.activities.map(a => a.name).includes(state.currentActivity)),
+                        currentContinent: '',
+                        filter: false,
+                        error: false
+                    }
                 }
             }else{
                 return {

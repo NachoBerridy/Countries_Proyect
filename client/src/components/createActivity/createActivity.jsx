@@ -7,6 +7,7 @@ import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 import home from '../../assets/homeButton.svg'
 import validate from '../..//utils/validate.js'
+import { useRef } from "react"
 
 export default function CreateActivity() {
   
@@ -15,6 +16,9 @@ export default function CreateActivity() {
   const countriesList = useSelector(state => state.countries)
   const activitiesList = useSelector(state => state.activities)
   const error = useSelector(state => state.error)
+
+  const seasonSelector = useRef()
+  const countriesSelector = useRef()
 
   //Estados locales
   const [seasonOptions, setSeasonOptions] = useState(['summer', 'winter', 'autumn', 'spring']) 
@@ -78,10 +82,10 @@ export default function CreateActivity() {
     let text = ''
     if (activitiesList.find(activity => activity.name === input.name)) {
       dispatch(updateActivity(input))
-      error ? text = 'Activity updated \n Do you want to create another activity?' : text = 'Activity not updated \n Do you want to try again'
+      !error ? text = 'Activity updated \n Do you want to create another activity?' : text = 'Activity not updated \n Do you want to try again'
     } else {
       dispatch(createActivity(input))
-      error ? text = 'Activity created\n Do you want to create another activity?' : text = 'Activity not created \n Do you want to try again'
+      !error ? text = 'Activity created\n Do you want to create another activity?' : text = 'Activity not created \n Do you want to try again'
     }
 
     // eslint-disable-next-line no-restricted-globals
@@ -105,15 +109,10 @@ export default function CreateActivity() {
       setSubmit(true)
     } else {
       setSubmit(false)
-      if (input.image === "") {
-        setInput((prev) => ({
-            ...prev,
-            image: defaultImage
-        }))
-      }
     }
-  }, [errors,input, defaultImage])
+  }, [errors,input])
 
+  console.log(seasonSelector.current)
   return (
     <div className={style.container}>
       <Link to='/Home' className={style.home}>
@@ -124,6 +123,7 @@ export default function CreateActivity() {
           <div className={style.column1}>
             <h2>Create Activity</h2>
             <input
+              className={errors.name && style.error}
               placeholder="Name"
               type="text"
               name="name"
@@ -133,6 +133,7 @@ export default function CreateActivity() {
             />
             {errors.name? <p>{errors.name}</p> : null}
             <input
+              className={errors.difficulty && style.error}
               placeholder="Difficulty (1-5)"
               type="number"
               name="difficulty"
@@ -142,6 +143,7 @@ export default function CreateActivity() {
             />
             {errors.difficulty? <p>{errors.difficulty}</p> : null}
             <input
+              className={errors.duration && style.error}
               placeholder="Duration"
               type="number"
               name="duration"
@@ -150,7 +152,11 @@ export default function CreateActivity() {
               onChange={(e) => handleChange(e)}
             />
             {errors.duration? <p>{errors.duration}</p> : null}
-            <Select className={style.select} placeholder='Season'
+            <Select className={`${style.select} ${errors.season && style.error}`} 
+              ref={seasonSelector}
+              placeholder='Season'
+              isClearable={true}
+              defaultValue={seasonOptions[0]}
               options ={seasonOptions.map((season) => {
                 return {value: season, label: season}
               })}
@@ -158,9 +164,12 @@ export default function CreateActivity() {
             />
             {errors.season? <p>{errors.season}</p> : null}
             <Select 
-              className={style.select}
+              className={`${style.select} ${errors.countries && style.error}`}
               isMulti
               placeholder="Select Countries"
+              value={input.countries.map((country) => {
+                return {value: country, label: country}
+              })}
               options={
                 countriesList.map((country) => {
                   return {value: country.id, label: country.name}

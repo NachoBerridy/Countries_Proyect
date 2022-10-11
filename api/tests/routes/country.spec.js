@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-const { expect } = require('chai');
+/* const { expect } = require('chai');
 const session = require('supertest-session');
 const app = require('../../src/app.js');
 const { Country, conn } = require('../../src/db.js');
@@ -14,11 +14,19 @@ describe('Country routes', () => {
   .catch((err) => {
     console.error('Unable to connect to the database:', err);
   }));
-  beforeEach(() => Country.sync({ force: true })
-    .then(() => Country.create(pokemon)));
+  it ('should get 404 if the country does not exist', () => {
+    agent.get('/countries/dasdas').expect(404)
+  });
+
+  it ('should get 200 if the country exists', () => {
+    agent.get('/countries/Argentina').expect(200)
+  });
+  it('should get 200', () =>
+      agent.get('/countries/?code=ARG').expect(200)
+  )
   describe('GET /countries', () => {
     it('should get 200', () =>
       agent.get('/countries').expect(200)
     );
   });
-});
+}); */
