@@ -115,7 +115,7 @@ const rootReducer = (state = initialState, action) => {
         case SEARCH_COUNTRY:
                 return {
                     ...state,
-                    filteredCountries: state.countries.filter(c => c.name.toLowerCase().includes(action.payload.toLowerCase())),
+                    filteredCountries: state.filteredCountries.filter(c => c.name.toLowerCase().includes(action.payload.toLowerCase())),
                     error: false
                 }
         case FILTER_COUNTRIES_BY_ACTIVITY:

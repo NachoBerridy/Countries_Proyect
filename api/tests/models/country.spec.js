@@ -1,4 +1,4 @@
-const { Country, conn } = require('../../src/db.js')
+const { Country, Activity, conn } = require('../../src/db.js')
 const { expect } = require('chai')
 
 describe('Country model', () => {
@@ -18,17 +18,18 @@ describe('Country model', () => {
         Country.create({ name: 'Argentina' })
       })
     })
-  })
-  /* describe('Methods', () => {
-    beforeEach(() => Country.sync({ force: true }))
-    describe('getCountry', () => {
-      it('should return a country', async () => {
-        await Country.create({ name: 'Argentina' })
-        const country = await Country.getCountry('Argentina')
-        expect(country.name).to.equal('Argentina')
+  }) 
+  describe('Relations', () => {
+    describe('Activity', () => {
+      it('should have a relation with Activity', async () => {
+        const country = await Country.create({ name: 'CHURUGUAY', id:'CHUR', flag: 'https://restcountries.eu/data/arg.svg', continent: 'Americas', capital: 'Buenos Aires', subregion: 'South America', area: 2780400, population: 43590400 })
+        const activity = await Activity.create({ name: 'Trekking', difficulty: 3, duration: 5, season: 'Summer', countryId: ['CHUR'] })
+        await country.addActivity(activity)
+        const activities = await country.getActivities()
+        expect(activities[0].name).to.equal('Trekking')
       })
     })
-  }) */
+  })
 })
 
 /* describe('Country models 1', () => {

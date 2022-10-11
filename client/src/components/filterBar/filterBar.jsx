@@ -38,7 +38,7 @@ const FilterBar = () => {
 
   useEffect(() => {
     currentActivity?((selectActivityRef.current.value = currentActivity)): selectActivityRef.current.value = "all"
-    // currentContinent?(selectContinentRef.current.value = currentContinent): selectContinentRef.current.value = "all"
+    //currentContinent?(selectContinentRef.current.value = currentContinent): selectContinentRef.current.value = "all"
     selectContinentRef.current.value = "all"
   }, [currentActivity, currentContinent])
 
