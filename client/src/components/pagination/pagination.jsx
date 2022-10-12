@@ -22,14 +22,14 @@ const Pagination = ({ countriesPerPage, totalCountries, paginate, page }) => {
     
     return (
       <nav>
-        <input type="button" onClick={() => {paginate(0)}} value='<<'/>
-        {page > 1 && <input type="button" onClick={() => {paginate(page-2)}} value='<'/>}
+        <input type="button" onClick={() => {paginate(1)}} value='<<'/>
+        {page > 1 && <input type="button" onClick={() => {paginate(page-1)}} value='<'/>}
         {
-          conditional(page).map(number => (<button onClick={() => {paginate(number-1)}} className = {(page===number)?style.selected:style.numbers}>{number}</button>))
+          conditional(page).map(number => (<button onClick={() => {paginate(number)}} className = {(page===number)?style.selected:style.numbers}>{number}</button>))
         }
-        {page<totalPages && <input type="button" onClick={() => {paginate(page)}} value='>'/>}
+        {page<totalPages && <input type="button" onClick={() => {paginate(page+1)}} value='>'/>}
         {/* <button onClick={() => {paginate(totalPages-1)}}> {'>>'} </button> */}
-        <input type="button" onClick={() => {paginate(totalPages-1)}} value='>>'/>
+        <input type="button" onClick={() => {paginate(totalPages)}} value='>>'/>
       </nav>
     )
 }

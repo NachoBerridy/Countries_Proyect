@@ -10,6 +10,7 @@ import {GET_COUNTRIES,
         REMOVE_SEARCH,
         DELETE_ACTIVITY,
         UPDATE_ACTIVITY,
+        CHANGE_PAGE,
         ERROR} from './types.js'
 import axios from "axios"
 
@@ -35,6 +36,13 @@ export function getActivities (){
 export function sortCountries(payload){
   return {
     type: SORT_COUNTRIES,
+    payload
+  }
+}
+
+export function changePage(payload){
+  return {
+    type: CHANGE_PAGE,
     payload
   }
 }

@@ -8,6 +8,7 @@ import {    GET_COUNTRIES,
             DELETE_ACTIVITY,
             UPDATE_ACTIVITY,
             REMOVE_SEARCH,
+            CHANGE_PAGE,
             ERROR} from '../actions/types.js';
 
 
@@ -20,7 +21,7 @@ const initialState = {
     continentFilter: [], //paises filtrados por continente
     currentActivity: '', //actividad filtrada actual
     currentContinent: '', //continente filtrado actual
-    searchString: '', //string de busqueda
+    currentPage: 1, //pagina actual
     loading: true, //carga inicial
     filter: true, //para saber si se esta filtrando o no
     error: false,
@@ -111,6 +112,11 @@ const rootReducer = (state = initialState, action) => {
                     error: false
                 }
             }
+        case CHANGE_PAGE:
+            return {
+                ...state,
+                currentPage: action.payload
+            }
         case GET_ACTIVITIES:
             return {
                 ...state,
@@ -120,14 +126,13 @@ const rootReducer = (state = initialState, action) => {
         case SEARCH_COUNTRY:
                 return {
                     ...state,
-                    searchString: action.payload.toLowerCase(),
                     displayedCountries: state.filteredCountries.filter(c => c.name.toLowerCase().includes(action.payload.toLowerCase())),
+                    currentPage: 1,
                     error: false
                 }
         case REMOVE_SEARCH:
             return {
                 ...state,
-                searchString: '',
                 filteredCountries: state.activityFilter.includes(state.continentFilter)
             }
         case FILTER_COUNTRIES_BY_ACTIVITY:
@@ -137,6 +142,7 @@ const rootReducer = (state = initialState, action) => {
                 filteredCountries: state.continentFilter.filter(c => c.activities.map(a => a.name).includes(action.payload)),
                 displayedCountries: state.continentFilter.filter(c => c.activities.map(a => a.name).includes(action.payload)),
                 currentActivity: action.payload,
+                currentPage: 1,
                 filter: false,
                 error: false
             }
@@ -148,6 +154,7 @@ const rootReducer = (state = initialState, action) => {
                 filteredCountries: state.activityFilter.filter(c => c.continent === action.payload),
                 displayedCountries: state.activityFilter.filter(c => c.continent === action.payload),
                 currentContinent: action.payload,
+                currentPage: 1,
                 filter: false,
                 error: false
             }
@@ -158,11 +165,10 @@ const rootReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         activityFilter: state.countries,
-                        // filteredCountries: state.continentFilter,
-                        // displayedCountries: state.continentFilter,
                         filteredCountries: state.countries,
                         displayedCountries: state.countries,
                         currentActivity: '',
+                        currentPage: 1,
                         filter: true,
                         error: false
                     }
@@ -170,11 +176,10 @@ const rootReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         activityFilter: state.countries,
-                        // filteredCountries: state.continentFilter.filter(c => c.continent === state.currentContinent),
-                        // displayedCountries: state.continentFilter.filter(c => c.continent === state.currentContinent),
                         filteredCountries: state.continentFilter,
                         displayedCountries: state.continentFilter,
                         currentActivity: '',
+                        currentPage: 1,
                         filter: false,
                         error: false
                     }
@@ -187,6 +192,7 @@ const rootReducer = (state = initialState, action) => {
                         filteredCountries: state.countries,
                         displayedCountries: state.countries,
                         currentContinent: '',
+                        currentPage: 1,
                         filter: true,
                         error: false
                     }
@@ -194,11 +200,10 @@ const rootReducer = (state = initialState, action) => {
                     return {
                         ...state,
                         continentFilter: state.countries,
-                        // filteredCountries: state.activityFilter.filter(c => c.activities.map(a => a.name).includes(state.currentActivity)),
-                        // displayedCountries: state.activityFilter.filter(c => c.activities.map(a => a.name).includes(state.currentActivity)),
                         filteredCountries: state.activityFilter,
                         displayedCountries: state.activityFilter,
                         currentContinent: '',
+                        currentPage: 1,
                         filter: false,
                         error: false
                     }
@@ -210,10 +215,9 @@ const rootReducer = (state = initialState, action) => {
                     displayedCountries: state.countries,
                     activityFilter: state.countries,
                     continentFilter: state.countries,
-                    search: state.countries,
                     currentActivity: '',
                     currentContinent: '',
-                    searchString: '',
+                    currentPage: 1,
                     filter: true,
                     error: false
                 }
@@ -227,6 +231,7 @@ const rootReducer = (state = initialState, action) => {
                 activityFilter: sort(state.activityFilter, action.payload),
                 continentFilter: sort(state.continentFilter, action.payload),
                 displayedCountries: sort(state.displayedCountries, action.payload),
+                currentPage: 1,
                 error: false
             }
         case POST_ACTIVITIES:
