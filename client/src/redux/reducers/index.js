@@ -215,6 +215,7 @@ const rootReducer = (state = initialState, action) => {
                     displayedCountries: state.countries,
                     activityFilter: state.countries,
                     continentFilter: state.countries,
+                    search: state.countries,
                     currentActivity: '',
                     currentContinent: '',
                     currentPage: 1,
