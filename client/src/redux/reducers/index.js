@@ -1,4 +1,6 @@
 import {    GET_COUNTRIES, 
+            GET_COUNTRY_DETAIL,
+            REMOVE_DETAIL,  
             POST_ACTIVITIES, 
             FILTER_COUNTRIES_BY_ACTIVITY, 
             SORT_COUNTRIES, GET_ACTIVITIES, 
@@ -6,6 +8,7 @@ import {    GET_COUNTRIES,
             REMOVE_FILTER,
             SEARCH_COUNTRY,
             DELETE_ACTIVITY,
+            REMOVE_ACTIVITY,
             UPDATE_ACTIVITY,
             REMOVE_SEARCH,
             CHANGE_PAGE,
@@ -16,6 +19,7 @@ const initialState = {
     countries: [], //todos los paises, no se modifica, solo se ordena
     filteredCountries: [], //paises filtrados por actividad y continente
     displayedCountries: [], //paises que se muestran en la pagina
+    countryDetail: {}, //pais seleccionado
     activities: [], //nombre de todas las actividades
     activityFilter: [], //paises filtrados por actividad
     continentFilter: [], //paises filtrados por continente
@@ -111,6 +115,20 @@ const rootReducer = (state = initialState, action) => {
                     loading: false,
                     error: false
                 }
+            }
+        case GET_COUNTRY_DETAIL:
+            return {
+                ...state,
+                countryDetail: action.payload,
+                loading: false,
+                error: false
+            }
+        case REMOVE_DETAIL:
+            return {
+                ...state,
+                countryDetail: {},
+                loading: true,
+                error: false
             }
         case CHANGE_PAGE:
             return {
@@ -246,6 +264,11 @@ const rootReducer = (state = initialState, action) => {
                 error: false
             }
         case DELETE_ACTIVITY:
+            return {
+                ...state,
+                error: false
+            }
+        case REMOVE_ACTIVITY:
             return {
                 ...state,
                 error: false

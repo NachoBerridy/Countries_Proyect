@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { getCountries } from "../../redux/actions/index.js";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import style from './landingPage.module.css'
 
 const LandingPage = () => {

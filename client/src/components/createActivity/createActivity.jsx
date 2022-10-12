@@ -18,9 +18,9 @@ export default function CreateActivity() {
   const error = useSelector(state => state.error)
 
   const seasonSelector = useRef()
-  const countriesSelector = useRef()
 
   //Estados locales
+  // eslint-disable-next-line no-unused-vars
   const [seasonOptions, setSeasonOptions] = useState(['summer', 'winter', 'autumn', 'spring']) 
   const [submit, setSubmit] = useState(true)
   let [input, setInput] = useState({
@@ -112,7 +112,6 @@ export default function CreateActivity() {
     }
   }, [errors,input])
 
-  console.log(seasonSelector.current)
   return (
     <div className={style.container}>
       <Link to='/Home' className={style.home}>

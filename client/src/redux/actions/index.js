@@ -1,4 +1,6 @@
 import {GET_COUNTRIES, 
+        GET_COUNTRY_DETAIL,
+        REMOVE_DETAIL,
         POST_ACTIVITIES, 
         FILTER_COUNTRIES_BY_ACTIVITY, 
         FILTER_COUNTRIES_BY_CONTINENT,
@@ -9,6 +11,7 @@ import {GET_COUNTRIES,
         SEARCH_COUNTRY,
         REMOVE_SEARCH,
         DELETE_ACTIVITY,
+        REMOVE_ACTIVITY,
         UPDATE_ACTIVITY,
         CHANGE_PAGE,
         ERROR} from './types.js'
@@ -21,6 +24,30 @@ export function getCountries(){
       type: GET_COUNTRIES,
       payload: response.data
     })
+  }
+}
+
+export function removeDetails(){
+  return {
+    type: REMOVE_DETAIL,
+    payload: {}
+  }
+}
+
+export function getCountryDetail(countryName){
+  return async function (dispatch){
+    try{
+      const { data } = await axios.get(`http://localhost:3001/countries/${countryName}`)
+      return dispatch({
+        type: GET_COUNTRY_DETAIL,
+        payload: data[0]
+      })
+    }catch(error){
+      return dispatch({
+        type: ERROR,
+        payload: error
+      })
+    }
   }
 }
 
@@ -158,4 +185,27 @@ export function deleteActivity(id){
       payload: response.data
     }) */
     
+}
+
+export function removeActivity(countryId, id){
+  
+  return async function (dispatch){
+    axios({
+      url: 'http://localhost:3001/Activity/remove',
+      method: 'DELETE',
+      data: {
+        countryId,
+        id
+      }
+    })
+    .then(response => {
+      dispatch({
+        type: REMOVE_ACTIVITY,
+        payload: response.data
+
+      })
+    }).catch(error => {
+      console.log(error)
+    })
+  }
 }

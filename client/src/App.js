@@ -1,6 +1,6 @@
 import './App.css';
 import React from 'react';
-import  { Route, Link } from  'react-router-dom';
+import  { Route } from  'react-router-dom';
 import LandingPage from './components/landingPage/landingPage.jsx';
 import Country from './components/country/country.jsx';
 // import CountryCard from './components/countryCard/countryCard.jsx';
