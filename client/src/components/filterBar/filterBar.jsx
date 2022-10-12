@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import africa from '../../assets/africa.svg'
 import north_america from '../../assets/north_america.svg'
@@ -9,7 +9,7 @@ import oceania from '../../assets/australia.svg'
 import antartica from '../../assets/Antarctica.svg'
 import SearchBar from "../searchBar/searchBar"
 import style from './filterBar.module.css'
-import Select from 'react-select'
+
 import {getActivities, 
         filterCountriesByActivity, 
         filterCountriesByContinent, 
@@ -24,7 +24,6 @@ const FilterBar = () => {
   const currentActivity = useSelector(state => state.currentActivity)
   const activities = useSelector((state) => state.activities).map(a => a.name)
   const continents = useSelector(state => state.countries).map(c => c.continent).filter((v, i, a) => a.indexOf(v) === i)
-
 
   //Referencias
   const selectContinentRef = useRef()
@@ -47,7 +46,7 @@ const FilterBar = () => {
   const filterByActivity = (e) => {
     e.preventDefault()
     if (e.target.value === 'all') {
-      dispatch(removeFilter())
+      dispatch(removeFilter('activity'))
     }else if (e.target.value !== 'all') {
       dispatch(filterCountriesByActivity(e.target.value))
     }
