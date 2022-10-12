@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import { useSelector,useDispatch } from "react-redux"
 import Countries from "../countries/countries"
 import FilterBar from "../filterBar/filterBar.jsx"
-import { getCountries, sortCountries} from "../../redux/actions"
+import { getCountries, sortCountries, changePage} from "../../redux/actions"
 import Pagination from "../pagination/pagination.jsx"
 import style from './home.module.css'
 import { Link  } from "react-router-dom"
@@ -17,7 +17,8 @@ const Home = () => {
   const countries = useSelector((state) => state.displayedCountries)
   const [firstCountry, setFirstCountry] = useState(0)
   const [lastCountry, setLastCountry] = useState(9)
-  const [page, setPage] = useState(1)
+  // const [page, setPage] = useState(1)
+  const page = useSelector(state => state.currentPage)
   const [order, setOrder] = useState('disorder')
 
   useEffect(() => {
@@ -25,10 +26,9 @@ const Home = () => {
     }, [dispatch])
 
     useEffect(() => {
-      setFirstCountry(0)
-      setLastCountry(10)
-      setPage(1)
-    }, [countries, countries.length])
+      setFirstCountry((page-1) * 10 )
+      setLastCountry(page  * 10)
+    }, [countries, countries.length, page])
   
     useEffect(() => {
     }, [firstCountry, lastCountry, page])
@@ -46,16 +46,12 @@ const Home = () => {
     }
   }
 
-
   const paginate = (number) => {
-    setFirstCountry(number * 10 )
-    setLastCountry((number + 1) * 10)
-    setPage(number + 1)
+    setFirstCountry((number-1) * 10 )
+    setLastCountry(number  * 10)
+    dispatch(changePage(number))
   }
   
-
-  
-
   return (
     <div>
       <div className={style.container}>

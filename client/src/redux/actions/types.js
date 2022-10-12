@@ -11,5 +11,6 @@ export const SEARCH_COUNTRY = 'SEARCH_COUNTRY';
 export const REMOVE_SEARCH = 'REMOVE_SEARCH';
 export const DELETE_ACTIVITY = 'DELETE_ACTIVITY';
 export const UPDATE_ACTIVITY = 'UPDATE_ACTIVITY';
+export const CHANGE_PAGE = 'CHANGE_PAGE';
 export const ERROR = 'ERROR';
 
