@@ -14,7 +14,7 @@ import ActivitiesList from "../activitiesList/activitiesList"
 
 const Home = () => {
   const dispatch = useDispatch()
-  const countries = useSelector((state) => state.filteredCountries)
+  const countries = useSelector((state) => state.displayedCountries)
   const [firstCountry, setFirstCountry] = useState(0)
   const [lastCountry, setLastCountry] = useState(9)
   const [page, setPage] = useState(1)

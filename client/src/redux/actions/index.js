@@ -7,6 +7,7 @@ import {GET_COUNTRIES,
         GET_ACTIVITIES, 
         REMOVE_FILTER,
         SEARCH_COUNTRY,
+        REMOVE_SEARCH,
         DELETE_ACTIVITY,
         UPDATE_ACTIVITY,
         ERROR} from './types.js'
@@ -42,6 +43,12 @@ export function searchCountry(payload){
   return {
     type: SEARCH_COUNTRY,
     payload
+  }
+}
+
+export function removeSearch(){
+  return {
+    type: REMOVE_SEARCH
   }
 }
 
